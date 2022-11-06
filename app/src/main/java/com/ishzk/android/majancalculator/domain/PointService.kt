@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PointService {
-    @GET("point")
+    @GET("point/")
     fun getPoint(
         @Query("m") m: String,
         @Query("s") s: String,

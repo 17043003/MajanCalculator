@@ -1,7 +1,9 @@
 package com.ishzk.android.majancalculator.domain
 
+import kotlinx.coroutines.flow.Flow
+
 interface PointRepository {
-    fun fetchPoint(request: PointRequestData): PointResponseData
+    suspend fun fetchPoint(request: PointRequestData): Flow<PointResponseData>
 }
 
 data class PointRequestData(
@@ -20,8 +22,8 @@ data class PointResponseData(
 )
 
 data class TileKinds(
-    val man: String,
-    val sou: String,
-    val pin: String,
-    val honors: String,
+    val man: String = "",
+    val sou: String = "",
+    val pin: String = "",
+    val honors: String = "",
 )
