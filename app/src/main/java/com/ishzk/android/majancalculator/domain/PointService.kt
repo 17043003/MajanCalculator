@@ -1,24 +1,46 @@
 package com.ishzk.android.majancalculator.domain
 
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-interface PointService {
-    @GET("point/")
-    fun getPoint(
-        @Query("m") m: String,
-        @Query("s") s: String,
-        @Query("p") p: String,
-        @Query("h") h: String,
-        @Query("w_m") w_m: String,
-        @Query("w_s") w_s: String,
-        @Query("w_p") w_p: String,
-        @Query("w_h") w_h: String,
-        @Query("dora_m") dora_m: String,
-        @Query("dora_s") dora_s: String,
-        @Query("dora_p") dora_p: String,
-        @Query("dora_h") dora_h: String,
-        @Query("tsumo") tsumo: Boolean,
-    ): Call<PointData>
+class PointService @Inject constructor(
+    private val api: PointAPI
+) {
+    suspend fun getPoint(
+        m: String,
+        s: String,
+        p: String,
+        h: String,
+        w_m: String,
+        w_s: String,
+        w_p: String,
+        w_h: String,
+        dora_m: String,
+        dora_s: String,
+        dora_p: String,
+        dora_h: String,
+        tsumo: Boolean,
+    ): Flow<Result<PointResponseData>> {
+        val response = api.getPoint(m, s, p, h, w_m, w_s, w_p, w_h, dora_m, dora_s, dora_p, dora_h, tsumo).execute()
+
+        return flow {
+            val body = response.body()
+
+            if(body == null){
+                emit(Result.failure(java.lang.RuntimeException("API call failed.")))
+                return@flow
+            }
+
+            val pointResponse = PointResponseData(
+                body.cost.total,
+                body.cost.yaku_level,
+                body.han,
+                body.fu,
+                body.yaku,
+            )
+            emit(Result.success(pointResponse))
+        }
+    }
+
 }
