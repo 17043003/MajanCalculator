@@ -5,9 +5,23 @@ import kotlin.math.min
 import kotlin.math.pow
 
 class FannFu(
-    fann: Int,
-    fu: Int,
+    fann: Int = 1,
+    fu: Int = 20,
 ){
+    var fann: Int = 1
+    set(value) {
+        field = if(value <= 1) 1
+        else if(value >= 13) 13
+        else value
+    }
+
+    var fu: Int = 20
+    set(value) {
+        field = if(value <= 20) 20
+        else if(value >= 110) 110
+        else value
+    }
+
     val basePoint = fu * 2.0.pow(fann.toDouble())
 
     enum class ScoreGrade{
