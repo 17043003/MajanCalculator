@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SmallText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MediumText">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SmallText.BoldText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MediumText.BoldText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MediumText.MediumSpinner">
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="SquareButton">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">48dp</item>
+    </style>
+</resources>

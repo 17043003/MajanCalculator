@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MajanCalculator</string>
+    <string name="fann_text">翻</string>
+    <string name="fu_text">符</string>
+    <string name="fann_description_spinner">翻数を入力</string>
+    <string name="fu_description_spinner">符を入力</string>
+    <string name="calculate_result_button">＝</string>
 </resources>
