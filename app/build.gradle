@@ -37,8 +37,8 @@ android {
     }
     namespace 'com.ishzk.android.majancalculator'
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding true
     }
 }
 
