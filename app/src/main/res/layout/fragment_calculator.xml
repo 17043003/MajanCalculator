@@ -19,10 +19,11 @@
             style="@style/MediumText.MediumSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
             android:contentDescription="@string/fann_description_spinner"
             android:entries="@{view_model.fanns}"
+            android:selectedItemPosition="@={view_model.fann}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +44,7 @@
             android:layout_marginStart="16dp"
             android:contentDescription="@string/fu_description_spinner"
             android:entries="@{view_model.fus}"
+            android:selectedItemPosition="@={view_model.fu}"
             app:layout_constraintStart_toEndOf="@+id/fannText"
             app:layout_constraintTop_toTopOf="@+id/fannSpinner" />
 
@@ -58,11 +60,10 @@
         <Button
             android:id="@+id/resultButton"
             style="@style/SquareButton"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:onClick="@{() -> view_model.onClickResultButton()}"
             android:text="@string/calculate_result_button"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fannSpinner"
             app:layout_constraintTop_toBottomOf="@+id/fannSpinner" />
 
         <TextView
@@ -71,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="8"
+            android:gravity="center_horizontal|center_vertical"
             android:text="@{view_model.calculateResult.toString()}"
             app:layout_constraintBottom_toBottomOf="@+id/resultButton"
             app:layout_constraintStart_toEndOf="@+id/resultButton"
