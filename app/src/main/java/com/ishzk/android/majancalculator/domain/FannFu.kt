@@ -89,7 +89,7 @@ class WinnerChild: Winner() {
     override fun receiveRonPoint(fannFu: FannFu): RonPoint {
         val payments = arrayOf(8000, 12000, 16000, 24000, 32000)
 
-        val payment = ceilPoint(fannFu.basePoint.toInt() * 4)
+        val payment = ceilPoint(fannFu.basePoint.toInt() * 4 * 4)
         return RonPoint(min(payment, payments[fannFu.scoreGrade.ordinal]))
     }
 
