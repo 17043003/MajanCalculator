@@ -16,10 +16,10 @@
 
         <Spinner
             android:id="@+id/fannSpinner"
-            style="@style/MediumText.MediumSpinner"
+            style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="64dp"
             android:contentDescription="@string/fann_description_spinner"
             android:entries="@{view_model.fanns}"
@@ -38,7 +38,7 @@
 
         <Spinner
             android:id="@+id/suSpinner"
-            style="@style/MediumText.MediumSpinner"
+            style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -60,7 +60,7 @@
         <Button
             android:id="@+id/resultButton"
             style="@style/SquareButton"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:onClick="@{() -> view_model.onClickResultButton()}"
             android:text="@string/calculate_result_button"
             app:layout_constraintStart_toStartOf="@+id/fannSpinner"
@@ -68,7 +68,7 @@
 
         <TextView
             android:id="@+id/resultText"
-            style="@style/MediumText.MediumSpinner"
+            style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="8"
@@ -77,5 +77,34 @@
             app:layout_constraintBottom_toBottomOf="@+id/resultButton"
             app:layout_constraintStart_toEndOf="@+id/resultButton"
             app:layout_constraintTop_toTopOf="@+id/resultButton" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/suSpinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fuText"
+            app:layout_constraintTop_toTopOf="@+id/suSpinner">
+
+            <Switch
+                android:id="@+id/parentChildSwitch"
+                style="@style/MediumSwitch"
+                android:checked="@={view_model.isParent}"
+                android:text="@string/parent_switch"
+                android:textOff="@string/child_switch"
+                android:textOn="@string/parent_switch"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <Switch
+                android:id="@+id/tsumoSwitch"
+                style="@style/MediumSwitch"
+                android:checked="@={view_model.isTsumo}"
+                android:text="@string/tsumo_switch"
+                android:textOff="@string/ron_switch"
+                android:textOn="@string/tsumo_switch"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </com.google.android.material.chip.ChipGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

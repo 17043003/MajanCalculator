@@ -40,14 +40,35 @@ class FannFu(
     }
 }
 
+class CalculateResult(private val winner: Winner, private val isTsumo: Boolean){
+    fun pointString(fannFu: FannFu): String{
+        return if(isTsumo){
+            val result = winner.receiveTsumoPoints(fannFu)
+            result.toString()
+        }else{
+            val result = winner.receiveRonPoint(fannFu)
+            result.toString()
+        }
+    }
+}
 data class TsumoPoint(
     val parentPayment: Int,
     val childPayment: Int,
-)
+){
+    override fun toString(): String {
+        return if(parentPayment != 0) {
+            "$childPayment - $parentPayment"
+        }else{
+            "$childPayment all"
+        }
+    }
+}
 
 data class RonPoint(
     val payment: Int,
-)
+){
+    override fun toString(): String = payment.toString()
+}
 
 abstract class Winner {
     abstract fun receiveTsumoPoints(fannFu: FannFu): TsumoPoint

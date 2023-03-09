@@ -5,4 +5,8 @@
     <string name="fann_description_spinner">翻数を入力</string>
     <string name="fu_description_spinner">符を入力</string>
     <string name="calculate_result_button">＝</string>
+    <string name="parent_switch">親</string>
+    <string name="tsumo_switch">ツモ</string>
+    <string name="child_switch" />
+    <string name="ron_switch">ロン</string>
 </resources>
