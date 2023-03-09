@@ -56,4 +56,46 @@ class WinnerChildShould {
         TestCase.assertEquals(8000, result.childPayment)
         TestCase.assertEquals(16000, result.parentPayment)
     }
+
+    @Test
+    fun child_ron_point_is_3900_when_3fann30fu(){
+        val result = child.receiveRonPoint(FannFu(3, 30))
+        TestCase.assertEquals(3900, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_7700_when_4fann30fu(){
+        val result = child.receiveRonPoint(FannFu(4, 30))
+        TestCase.assertEquals(7700, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_8000_when_4fann40fu(){
+        val result = child.receiveRonPoint(FannFu(4, 40))
+        TestCase.assertEquals(8000, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_12000_when_6fann30fu(){
+        val result = child.receiveRonPoint(FannFu(6, 30))
+        TestCase.assertEquals(12000, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_16000_when_8fann30fu(){
+        val result = child.receiveRonPoint(FannFu(8, 30))
+        TestCase.assertEquals(16000, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_24000_when_11fann30fu(){
+        val result = child.receiveRonPoint(FannFu(11, 30))
+        TestCase.assertEquals(24000, result.payment)
+    }
+
+    @Test
+    fun child_ron_point_is_32000_when_13fann30fu(){
+        val result = child.receiveRonPoint(FannFu(13, 30))
+        TestCase.assertEquals(32000, result.payment)
+    }
 }
