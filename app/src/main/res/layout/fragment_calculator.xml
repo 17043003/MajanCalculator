@@ -37,7 +37,7 @@
             app:layout_constraintStart_toEndOf="@+id/fannSpinner" />
 
         <Spinner
-            android:id="@+id/suSpinner"
+            android:id="@+id/fuSpinner"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fu_text"
-            app:layout_constraintBottom_toBottomOf="@+id/suSpinner"
-            app:layout_constraintStart_toEndOf="@+id/suSpinner" />
+            app:layout_constraintBottom_toBottomOf="@+id/fuSpinner"
+            app:layout_constraintStart_toEndOf="@+id/fuSpinner" />
 
         <Button
             android:id="@+id/resultButton"
@@ -79,13 +79,14 @@
             app:layout_constraintTop_toTopOf="@+id/resultButton" />
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/calculateSwtichGroup"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/suSpinner"
+            app:layout_constraintBottom_toBottomOf="@+id/fuSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fuText"
-            app:layout_constraintTop_toTopOf="@+id/suSpinner">
+            app:layout_constraintTop_toTopOf="@+id/fuSpinner">
 
             <Switch
                 android:id="@+id/parentChildSwitch"
