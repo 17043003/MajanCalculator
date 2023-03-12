@@ -53,6 +53,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.6.1"
     implementation "androidx.fragment:fragment-ktx:1.5.5"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"

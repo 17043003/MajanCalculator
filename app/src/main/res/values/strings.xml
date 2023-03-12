@@ -10,4 +10,5 @@
     <string name="child_switch" />
     <string name="ron_switch">ロン</string>
     <string name="menu_calculate_item">点数計算</string>
+    <string name="menu_wait_hand_item">待ち牌表示</string>
 </resources>
