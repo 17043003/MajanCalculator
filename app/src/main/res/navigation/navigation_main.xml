@@ -9,5 +9,14 @@
         android:id="@+id/calculatorFragment"
         android:name="com.ishzk.android.majancalculator.ui.CalculatorFragment"
         android:label="fragment_calculator"
-        tools:layout="@layout/fragment_calculator" />
+        tools:layout="@layout/fragment_calculator" >
+        <action
+            android:id="@+id/action_calculatorFragment_to_waitHandFragment"
+            app:destination="@id/waitHandFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waitHandFragment"
+        android:name="com.ishzk.android.majancalculator.ui.WaitHandFragment"
+        android:label="fragment_wait_hand"
+        tools:layout="@layout/fragment_wait_hand" />
 </navigation>

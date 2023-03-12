@@ -4,4 +4,8 @@
     <item
         android:id="@+id/calculatorFragment"
         android:title="@string/menu_calculate_item" />
+
+    <item
+        android:id="@+id/waitHandFragment"
+        android:title="@string/menu_wait_hand_item" />
 </menu>
