@@ -1,6 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.WaitHandFragment"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="view_model"
+            type="com.ishzk.android.majancalculator.ui.WaitHandViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.WaitHandFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/m1"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m1_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m1"
+                app:layout_constraintBottom_toTopOf="@+id/s1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/m2"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m2_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m2"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m1" />
+
+            <ImageButton
+                android:id="@+id/m3"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m3_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m3"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m2" />
+
+            <ImageButton
+                android:id="@+id/m4"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m4_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m4"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m3" />
+
+            <ImageButton
+                android:id="@+id/m5"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m5_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m5"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m4" />
+
+            <ImageButton
+                android:id="@+id/m6"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m6_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m6"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m5" />
+
+            <ImageButton
+                android:id="@+id/m7"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m7_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m7"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m6" />
+
+            <ImageButton
+                android:id="@+id/m8"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m8_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m8"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m7" />
+
+            <ImageButton
+                android:id="@+id/m9"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_m9_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/m9"
+                app:layout_constraintBottom_toBottomOf="@+id/m1"
+                app:layout_constraintStart_toEndOf="@+id/m8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/s1"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s1_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/m1" />
+
+            <ImageButton
+                android:id="@+id/s2"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s2_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s1" />
+
+            <ImageButton
+                android:id="@+id/s3"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s3_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s2" />
+
+            <ImageButton
+                android:id="@+id/s4"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s4_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s3" />
+
+            <ImageButton
+                android:id="@+id/s5"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s5_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s4" />
+
+            <ImageButton
+                android:id="@+id/s6"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s6_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s5" />
+
+            <ImageButton
+                android:id="@+id/s7"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s7_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s6" />
+
+            <ImageButton
+                android:id="@+id/s8"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s8_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s7" />
+
+            <ImageButton
+                android:id="@+id/s9"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_s9_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/s9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/s8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/p1"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p1_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/m1" />
+
+            <ImageButton
+                android:id="@+id/p2"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p2_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p1" />
+
+            <ImageButton
+                android:id="@+id/p3"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p3_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p2" />
+
+            <ImageButton
+                android:id="@+id/p4"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p4_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p3" />
+
+            <ImageButton
+                android:id="@+id/p5"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p5_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p4" />
+
+            <ImageButton
+                android:id="@+id/p6"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p6_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p5" />
+
+            <ImageButton
+                android:id="@+id/p7"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p7_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p6" />
+
+            <ImageButton
+                android:id="@+id/p8"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p8_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p7" />
+
+            <ImageButton
+                android:id="@+id/p9"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_p9_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/p9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/p8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="309dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/h1"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h1_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/m1" />
+
+            <ImageButton
+                android:id="@+id/h2"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h2_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h1" />
+
+            <ImageButton
+                android:id="@+id/h3"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h3_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h2" />
+
+            <ImageButton
+                android:id="@+id/h4"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h4_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h3" />
+
+            <ImageButton
+                android:id="@+id/h5"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h5_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h4" />
+
+            <ImageButton
+                android:id="@+id/h6"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h6_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h5" />
+
+            <ImageButton
+                android:id="@+id/h7"
+                style="@style/ImageButton"
+                android:contentDescription="@string/image_h7_button"
+                android:onClick="@{view_model::onClickImageButton}"
+                android:src="@drawable/h7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/h6" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

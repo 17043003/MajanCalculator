@@ -19,6 +19,14 @@ class WaitHandFragment : Fragment() {
     ): View {
         _binding = FragmentWaitHandBinding.inflate(layoutInflater, container, false)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
