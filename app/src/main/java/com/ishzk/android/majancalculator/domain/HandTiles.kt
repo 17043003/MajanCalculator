@@ -42,6 +42,18 @@ class CloseTiles(
             ?.toList()
     }
 
+    fun splitByKindWithPrefix(): List<String>? {
+        val list = splitByKind()
+        return list?.flatMap {
+            val prefix = it.first()
+            val numbers = it.drop(1)
+
+            numbers.map { number ->
+                prefix + number.toString()
+            }
+        }
+    }
+
     override fun toString(): String {
         return tiles
     }

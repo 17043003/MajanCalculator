@@ -12,7 +12,6 @@ import com.ishzk.android.majancalculator.domain.WinTile
 class WaitHandViewModel : ViewModel() {
     val closeTiles = MutableLiveData<CloseTiles>()
     val openTiles = MutableLiveData<List<OpenTile>>()
-    val winTile = MutableLiveData<WinTile>()
 
     fun onClickImageButton(view: View){
         val id = getIDString(view.id)
