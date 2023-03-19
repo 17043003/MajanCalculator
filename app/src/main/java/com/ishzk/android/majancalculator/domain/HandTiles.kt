@@ -10,7 +10,40 @@ class CloseTiles(
     private var tiles: String,
 ){
     fun add(value: String){
-        if(value.length >= 13) tiles else tiles + value
+        if(value.length != 2) return
+
+        val eachKinds = splitByKind()
+        tiles = if(eachKinds == null) value
+        else{
+            val prefix = value.take(1)
+
+            val foundKind = eachKinds.find { it.take(1) == prefix }
+            if(foundKind == null){
+                tiles += value
+                return
+            }
+
+            eachKinds.joinToString("") { kind ->
+                if (kind.take(1) != prefix) kind
+                else {
+                    val number = value.drop(1)
+                    if(kind.count{ it == number.first() } >= 4) return@joinToString kind
+                    prefix + (kind.drop(1) + number).split("").sorted().joinToString("")
+                }
+            }
+        }
+    }
+
+    private fun splitByKind(): List<String>? {
+        val pattern = Regex("""([mpsh]\d+)""")
+        val results = pattern.findAll(tiles)
+
+        return results.flatMap { result -> result.groups.map { group -> group?.value ?: "" }?.drop(1) }
+            ?.toList()
+    }
+
+    override fun toString(): String {
+        return tiles
     }
 }
 
