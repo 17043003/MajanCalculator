@@ -23,7 +23,7 @@ class WaitHandViewModel : ViewModel() {
         Log.d(TAG, "CloseTiles: $newTiles")
     }
 
-    private fun getIDString(viewID: Int): String = when(viewID){
+    fun getIDString(viewID: Int): String = when(viewID){
         R.id.m1 -> "m1"
         R.id.m2 -> "m2"
         R.id.m3 -> "m3"
