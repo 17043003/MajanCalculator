@@ -5,13 +5,20 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ishzk.android.majancalculator.R
-import com.ishzk.android.majancalculator.domain.CloseTiles
-import com.ishzk.android.majancalculator.domain.OpenTile
-import com.ishzk.android.majancalculator.domain.WinTile
+import com.ishzk.android.majancalculator.domain.*
+import kotlinx.coroutines.flow.MutableStateFlow
+
+
+data class LongClickedState(
+    var hand: Tile?,
+    var isClicked: Boolean = false,
+)
 
 class WaitHandViewModel : ViewModel() {
     val closeTiles = MutableLiveData<CloseTiles>()
     val openTiles = MutableLiveData<List<OpenTile>>()
+
+    val longClicked = MutableStateFlow(LongClickedState(null, false))
 
     fun onClickImageButton(view: View){
         val id = getIDString(view.id)
@@ -21,6 +28,18 @@ class WaitHandViewModel : ViewModel() {
         newTiles.add(id)
         closeTiles.postValue(newTiles)
         Log.d(TAG, "CloseTiles: $newTiles")
+    }
+
+    fun onLongClickImageButton(viewID: Int): Boolean{
+        val hand = getIDString(viewID)
+        Log.d(WaitHandFragment.TAG, "$hand long tapped.")
+        longClicked.value = LongClickedState(Tile(hand), true)
+        return true
+    }
+
+    fun onSelectOpenHand(openKind: OpenTile){
+        val newList = openTiles.value?.plus(openKind)
+        openTiles.postValue(newList ?: listOf(openKind))
     }
 
     fun getIDString(viewID: Int): String = when(viewID){
@@ -62,6 +81,49 @@ class WaitHandViewModel : ViewModel() {
         R.id.h6 -> "h6"
         R.id.h7 -> "h7"
         else -> ""
+    }
+
+    fun getDrawableID(id: String): Int {
+        return when(id) {
+            "m1" -> R.drawable.m1
+            "m2" -> R.drawable.m2
+            "m3" -> R.drawable.m3
+            "m4" -> R.drawable.m4
+            "m5" -> R.drawable.m5
+            "m6" -> R.drawable.m6
+            "m7" -> R.drawable.m7
+            "m8" -> R.drawable.m8
+            "m9" -> R.drawable.m9
+
+            "s1" -> R.drawable.s1
+            "s2" -> R.drawable.s2
+            "s3" -> R.drawable.s3
+            "s4" -> R.drawable.s4
+            "s5" -> R.drawable.s5
+            "s6" -> R.drawable.s6
+            "s7" -> R.drawable.s7
+            "s8" -> R.drawable.s8
+            "s9" -> R.drawable.s9
+
+            "p1" -> R.drawable.p1
+            "p2" -> R.drawable.p2
+            "p3" -> R.drawable.p3
+            "p4" -> R.drawable.p4
+            "p5" -> R.drawable.p5
+            "p6" -> R.drawable.p6
+            "p7" -> R.drawable.p7
+            "p8" -> R.drawable.p8
+            "p9" -> R.drawable.p9
+
+            "h1" -> R.drawable.h1
+            "h2" -> R.drawable.h2
+            "h3" -> R.drawable.h3
+            "h4" -> R.drawable.h4
+            "h5" -> R.drawable.h5
+            "h6" -> R.drawable.h6
+            "h7" -> R.drawable.h7
+            else -> 0
+        }
     }
 
     companion object {

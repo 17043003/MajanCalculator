@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/KanItem" >
+        <menu >
+            <item
+                android:id="@+id/minkanItem"
+                android:title="@string/MinkanItem" />
+            <item
+                android:id="@+id/ankanItem"
+                android:title="@string/AnkanItem" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/ponItem"
+        android:title="@string/PonItem" />
+    <item android:title="@string/ChiItem">
+        <menu >
+            <item
+                android:id="@+id/rightChiItem"
+                android:title="@string/RightChiItem" />
+            <item
+                android:id="@+id/centerChiItem"
+                android:title="@string/CenterChiItem" />
+            <item
+                android:id="@+id/leftChiItem"
+                android:title="@string/LeftChiItem" />
+        </menu>
+    </item>
+</menu>

@@ -45,4 +45,12 @@
     <string name="image_h5_button">select h5 as hands</string>
     <string name="image_h6_button">select h6 as hands</string>
     <string name="image_h7_button">select h7 as hands</string>
+    <string name="KanItem">カン</string>
+    <string name="PonItem">ポン</string>
+    <string name="ChiItem">チー</string>
+    <string name="AnkanItem">暗カン</string>
+    <string name="MinkanItem">明カン</string>
+    <string name="LeftChiItem">終点でチー</string>
+    <string name="CenterChiItem">中心でチー</string>
+    <string name="RightChiItem">始点でチー</string>
 </resources>
