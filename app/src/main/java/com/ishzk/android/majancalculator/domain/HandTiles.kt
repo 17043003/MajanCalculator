@@ -1,5 +1,11 @@
 package com.ishzk.android.majancalculator.domain
 
+
+class Tile(hand: String){
+    val kind: TileKind = TileKind.getKind(hand) ?: throw java.lang.IllegalStateException("Tile kind char is not contains.")
+    val num: String = hand.last().toString()
+}
+
 data class HandTiles(
     val closeTiles: CloseTiles,
     val openTiles: List<OpenTile>? = null,
@@ -74,6 +80,22 @@ sealed class TileKind{
     open val kind: String = ""
     override fun toString(): String {
         return kind
+    }
+
+    companion object {
+        fun getKind(hand: String): TileKind? {
+            return if(hand.length != 2){
+                null
+            }else{
+                when(hand.first()){
+                    'm' -> Manzu()
+                    's' -> Souzu()
+                    'p' -> Pinzu()
+                    'h' -> Honor()
+                    else -> null
+                }
+            }
+        }
     }
 
     class Manzu: TileKind() {
