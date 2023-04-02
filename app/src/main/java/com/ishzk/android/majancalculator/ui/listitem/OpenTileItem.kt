@@ -6,9 +6,10 @@ import com.ishzk.android.majancalculator.databinding.ItemClosedKanBinding
 import com.ishzk.android.majancalculator.databinding.ItemOpenChiBinding
 import com.ishzk.android.majancalculator.databinding.ItemOpenKanBinding
 import com.ishzk.android.majancalculator.databinding.ItemOpenPonBinding
+import com.ishzk.android.majancalculator.domain.OpenTile
 import com.xwray.groupie.viewbinding.BindableItem
 
-class PonItem(private val ids: List<Int>): BindableItem<ItemOpenPonBinding>() {
+class PonItem(private val ids: List<Int>, private val item: OpenTile, private val listener: (OpenTile) -> Unit ): BindableItem<ItemOpenPonBinding>() {
     override fun initializeViewBinding(view: View): ItemOpenPonBinding = ItemOpenPonBinding.bind(view)
 
     override fun getLayout(): Int = R.layout.item_open_pon
@@ -20,10 +21,14 @@ class PonItem(private val ids: List<Int>): BindableItem<ItemOpenPonBinding>() {
             centerImage.setImageResource(ids[1])
             rightImage.setImageResource(ids[2])
         }
+
+        viewBinding.root.setOnClickListener{
+            listener(item)
+        }
     }
 }
 
-class ChiItem(private val ids: List<Int>): BindableItem<ItemOpenChiBinding>() {
+class ChiItem(private val ids: List<Int>, private val item: OpenTile, private val listener: (OpenTile) -> Unit ): BindableItem<ItemOpenChiBinding>() {
     override fun initializeViewBinding(view: View): ItemOpenChiBinding = ItemOpenChiBinding.bind(view)
 
     override fun getLayout(): Int = R.layout.item_open_chi
@@ -35,10 +40,14 @@ class ChiItem(private val ids: List<Int>): BindableItem<ItemOpenChiBinding>() {
             centerChi.setImageResource(ids[1])
             rightChi.setImageResource(ids[2])
         }
+
+        viewBinding.root.setOnClickListener{
+            listener(item)
+        }
     }
 }
 
-class OpenKanItem(private val ids: List<Int>): BindableItem<ItemOpenKanBinding>() {
+class OpenKanItem(private val ids: List<Int>, private val item: OpenTile, private val listener: (OpenTile) -> Unit ): BindableItem<ItemOpenKanBinding>() {
     override fun initializeViewBinding(view: View): ItemOpenKanBinding = ItemOpenKanBinding.bind(view)
 
     override fun getLayout(): Int = R.layout.item_open_kan
@@ -51,10 +60,14 @@ class OpenKanItem(private val ids: List<Int>): BindableItem<ItemOpenKanBinding>(
             centerKan2.setImageResource(ids[2])
             rightKan.setImageResource(ids[3])
         }
+
+        viewBinding.root.setOnClickListener{
+            listener(item)
+        }
     }
 }
 
-class ClosedKanItem(private val ids: List<Int>): BindableItem<ItemClosedKanBinding>() {
+class ClosedKanItem(private val ids: List<Int>, private val item: OpenTile, private val listener: (OpenTile) -> Unit): BindableItem<ItemClosedKanBinding>() {
     override fun initializeViewBinding(view: View): ItemClosedKanBinding = ItemClosedKanBinding.bind(view)
 
     override fun getLayout(): Int = R.layout.item_closed_kan
@@ -66,6 +79,10 @@ class ClosedKanItem(private val ids: List<Int>): BindableItem<ItemClosedKanBindi
             centerKan1.setImageResource(ids[1])
             centerKan2.setImageResource(ids[2])
             backKan2.setImageResource(ids[3])
+        }
+
+        viewBinding.root.setOnClickListener{
+            listener(item)
         }
     }
 }
