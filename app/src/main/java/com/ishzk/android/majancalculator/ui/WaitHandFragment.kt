@@ -16,9 +16,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ishzk.android.majancalculator.R
 import com.ishzk.android.majancalculator.databinding.FragmentWaitHandBinding
 import com.ishzk.android.majancalculator.domain.OpenTile
+import com.ishzk.android.majancalculator.domain.OpenTileIsInvalidError
 import com.ishzk.android.majancalculator.domain.Tile
 import com.ishzk.android.majancalculator.domain.TileKind
 import com.ishzk.android.majancalculator.ui.adapter.SelectHandAdapter
+import com.ishzk.android.majancalculator.ui.listitem.ChiItem
+import com.ishzk.android.majancalculator.ui.listitem.ClosedKanItem
+import com.ishzk.android.majancalculator.ui.listitem.OpenKanItem
+import com.ishzk.android.majancalculator.ui.listitem.PonItem
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieAdapter
+import com.xwray.groupie.viewbinding.GroupieViewHolder
 
 class WaitHandFragment : Fragment() {
     private val viewModel: WaitHandViewModel by viewModels()
@@ -26,6 +34,7 @@ class WaitHandFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val adapter by lazy { SelectHandAdapter(viewModel) }
+    private val openTileAdapter by lazy { GroupieAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +48,31 @@ class WaitHandFragment : Fragment() {
         binding.selectedHandsList.adapter = adapter
         binding.selectedHandsList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
+        binding.openHandList.adapter = openTileAdapter
+
         lifecycleScope.launchWhenStarted {
             viewModel.closeTiles.observe(viewLifecycleOwner){
                 adapter.submitList(it.splitByKindWithPrefix())
+            }
+
+            viewModel.openTiles.observe(viewLifecycleOwner){
+                openTileAdapter.clear()
+                val itemList = it.mapNotNull { tiles ->
+                    try {
+                        val ids = tiles.hands.map { tile -> viewModel.getDrawableID(tile) }
+                        when (tiles) {
+                            is OpenTile.Pon -> PonItem(ids)
+                            is OpenTile.Chi -> ChiItem(ids)
+                            is OpenTile.Kan -> {
+                                if(tiles.close) ClosedKanItem(ids) else OpenKanItem(ids)
+                            }
+                        }
+                    } catch (e: OpenTileIsInvalidError) {
+                        Log.e(TAG, "Error:$e")
+                        null
+                    }
+                }
+                openTileAdapter.addAll(itemList)
             }
 
             val listener = { button: View ->
@@ -74,8 +105,8 @@ class WaitHandFragment : Fragment() {
                         val num = tile.num
 
                         val openTile = when(item.itemId){
-                            R.id.ankanItem -> OpenTile.Kan(kind, num, false)
-                            R.id.minkanItem -> OpenTile.Kan(kind, num, true)
+                            R.id.ankanItem -> OpenTile.Kan(kind, num, true)
+                            R.id.minkanItem -> OpenTile.Kan(kind, num, false)
                             R.id.ponItem -> OpenTile.Pon(kind, num)
                             R.id.leftChiItem -> OpenTile.Chi(kind, OpenTile.Chi.sequenceNumbers(num).first() ?: return@setOnMenuItemClickListener true)
                             R.id.centerChiItem -> OpenTile.Chi(kind, OpenTile.Chi.sequenceNumbers(num).getOrNull(1) ?: return@setOnMenuItemClickListener true)

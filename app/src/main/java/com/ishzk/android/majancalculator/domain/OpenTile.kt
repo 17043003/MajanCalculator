@@ -2,6 +2,7 @@ package com.ishzk.android.majancalculator.domain
 
 sealed class OpenTile {
     open val hand: String = ""
+    open val hands: List<String> = listOf()
 
     class Pon(
         kind: TileKind,
@@ -14,13 +15,18 @@ sealed class OpenTile {
         private val num = if(isValid()) n else -1
 
         override val hand = "$kind$num"
+        override val hands: List<String>
+            get() {
+                val kind = hand.first()
+                return hand.filter { it.isDigit() }.map { "$kind$it" }
+            }
     }
 
     class Chi(
-        kind: TileKind,
+        private val kind: TileKind,
         private val n: String,
     ): OpenTile() {
-        private fun isValid() = hasThree() && isSequential()
+        private fun isValid() = hasThree() && isSequential() && isNumbers()
         private fun hasThree() = n.length == 3
         private fun isSequential(): Boolean {
             if(!hasThree()) return false
@@ -28,9 +34,17 @@ sealed class OpenTile {
             return (seqNumbers[0] + 1 == seqNumbers[1]) && (seqNumbers[1] == seqNumbers[2] - 1)
         }
 
+        private fun isNumbers() = kind !is TileKind.Honor
+
         private val num: String = if(isValid()) n else ""
 
         override val hand: String = if(isValid()) "$kind$num" else ""
+        override val hands: List<String>
+            get() {
+                if(!isValid()) throw OpenTileIsInvalidError()
+                val kind = hand.first()
+                return hand.filter { it.isDigit() }.map { "$kind$it" }
+            }
 
         companion object {
             fun sequenceNumbers(num: String): List<String?> {
@@ -49,7 +63,7 @@ sealed class OpenTile {
     class Kan(
         kind: TileKind,
         private val n: String,
-        close: Boolean,
+        val close: Boolean,
     ): OpenTile() {
         private fun isValid() = hasFour() && hasSameNumber()
         private fun hasFour() = n.length == 4
@@ -59,5 +73,15 @@ sealed class OpenTile {
         private val closed = if(close) "" else "o"
 
         override val hand = "$kind$num$closed"
+        override val hands: List<String>
+            get() {
+                val kind = hand.first()
+                return if(closed == "") hand.filter { it.isDigit() }.map { "$kind$it" } else hand.filter { it.isDigit() }.map { "$kind$it" }
+            }
     }
+}
+
+class OpenTileIsInvalidError(): Exception(){
+    override val message: String
+        get() = "OpenTile is invalid."
 }
