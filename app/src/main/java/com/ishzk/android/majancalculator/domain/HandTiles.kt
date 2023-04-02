@@ -8,15 +8,34 @@ class Tile(hand: String){
 
 data class HandTiles(
     val closeTiles: CloseTiles,
-    val openTiles: List<OpenTile>? = null,
-    val winTile: WinTile,
-)
+    val openTiles: MutableList<OpenTile> = mutableListOf(),
+    val winTile: WinTile? = null,
+){
+
+    private fun handSize(): Int = closeTiles.length() + (openTiles.size.times(3))
+    private fun under13Tiles() = handSize() < 13
+
+    fun add(closeTile: String){
+        if(under13Tiles()) {
+            closeTiles.add(closeTile)
+        }
+    }
+
+    fun add(openTile: OpenTile){
+        if(openTiles.size <= 3 && handSize() + 3 <= 13 && under13Tiles()) {
+            openTiles.add(openTile)
+        }
+    }
+}
 
 class CloseTiles(
     private var tiles: String,
 ){
+    private fun under13Tiles(): Boolean = length() <= 13
+
     fun add(value: String){
         if(value.length != 2) return
+        if(!under13Tiles()) return
 
         val eachKinds = splitByKind()
         tiles = if(eachKinds == null) value
@@ -59,6 +78,8 @@ class CloseTiles(
             }
         }
     }
+
+    fun length(): Int = splitByKindWithPrefix()?.size ?: 0
 
     override fun toString(): String {
         return tiles

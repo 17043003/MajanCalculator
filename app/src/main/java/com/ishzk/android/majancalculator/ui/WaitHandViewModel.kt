@@ -15,8 +15,7 @@ data class LongClickedState(
 )
 
 class WaitHandViewModel : ViewModel() {
-    val closeTiles = MutableLiveData<CloseTiles>()
-    val openTiles = MutableLiveData<List<OpenTile>>()
+    val handTiles = MutableLiveData<HandTiles>()
 
     val longClicked = MutableStateFlow(LongClickedState(null, false))
 
@@ -24,10 +23,14 @@ class WaitHandViewModel : ViewModel() {
         val id = getIDString(view.id)
         Log.d(TAG, "clicked $id")
 
-        val newTiles = CloseTiles(if(closeTiles.value == null) "" else closeTiles.value.toString())
-        newTiles.add(id)
-        closeTiles.postValue(newTiles)
-        Log.d(TAG, "CloseTiles: $newTiles")
+        if(handTiles.value == null){
+            val handTile = HandTiles(CloseTiles(id), mutableListOf())
+            handTiles.postValue(handTile)
+        }else{
+            handTiles.value?.add(id)
+            handTiles.postValue(handTiles.value)
+        }
+        Log.d(TAG, "CloseTiles: ${CloseTiles(id)}")
     }
 
     fun onLongClickImageButton(viewID: Int): Boolean{
@@ -38,8 +41,18 @@ class WaitHandViewModel : ViewModel() {
     }
 
     fun onSelectOpenHand(openKind: OpenTile){
-        val newList = openTiles.value?.plus(openKind)
-        openTiles.postValue(newList ?: listOf(openKind))
+        if(handTiles.value == null){
+            val handTile = HandTiles(CloseTiles(""), mutableListOf(openKind))
+            handTiles.postValue(handTile)
+        }else{
+            handTiles.value?.add(openKind)
+            handTiles.postValue(handTiles.value)
+        }
+    }
+
+    fun onClickOpenHand(openTile: OpenTile){
+        handTiles.value?.openTiles?.remove(openTile)
+        handTiles.postValue(handTiles.value)
     }
 
     fun getIDString(viewID: Int): String = when(viewID){

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ishzk.android.majancalculator.R
 import com.ishzk.android.majancalculator.databinding.ItemSelectedHandBinding
 import com.ishzk.android.majancalculator.domain.CloseTiles
+import com.ishzk.android.majancalculator.domain.HandTiles
 import com.ishzk.android.majancalculator.ui.WaitHandViewModel
 
 class SelectHandAdapter(private val viewModel: WaitHandViewModel): ListAdapter<String, SelectImageViewHolder>(DIFF_UTIL_ITEM_CALLBACK){
@@ -32,7 +33,7 @@ class SelectImageViewHolder(private val binding: ItemSelectedHandBinding, privat
 
     fun setOnClickListener(item: String){
         binding.handImage.setOnClickListener {
-            val closeTiles = viewModel.closeTiles.value?.splitByKindWithPrefix()?.toMutableList()
+            val closeTiles = viewModel.handTiles.value?.closeTiles?.splitByKindWithPrefix()?.toMutableList()
             closeTiles?.remove(item)
 
             val c = CloseTiles("")
@@ -40,7 +41,8 @@ class SelectImageViewHolder(private val binding: ItemSelectedHandBinding, privat
                 c.add(it)
             }
 
-            viewModel.closeTiles.postValue(c)
+            val open = viewModel.handTiles.value?.openTiles?.toMutableList() ?: mutableListOf()
+            viewModel.handTiles.postValue(HandTiles(c, open))
         }
     }
 }

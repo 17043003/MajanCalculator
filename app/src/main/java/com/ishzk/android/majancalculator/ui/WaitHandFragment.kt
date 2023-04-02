@@ -51,20 +51,19 @@ class WaitHandFragment : Fragment() {
         binding.openHandList.adapter = openTileAdapter
 
         lifecycleScope.launchWhenStarted {
-            viewModel.closeTiles.observe(viewLifecycleOwner){
-                adapter.submitList(it.splitByKindWithPrefix())
-            }
+            viewModel.handTiles.observe(viewLifecycleOwner){
+                adapter.submitList(it.closeTiles.splitByKindWithPrefix())
 
-            viewModel.openTiles.observe(viewLifecycleOwner){
                 openTileAdapter.clear()
-                val itemList = it.mapNotNull { tiles ->
+                val itemList = it.openTiles.mapNotNull { tiles ->
                     try {
                         val ids = tiles.hands.map { tile -> viewModel.getDrawableID(tile) }
                         when (tiles) {
-                            is OpenTile.Pon -> PonItem(ids)
-                            is OpenTile.Chi -> ChiItem(ids)
+                            is OpenTile.Pon -> PonItem(ids, tiles) { viewModel.onClickOpenHand(tiles) }
+                            is OpenTile.Chi -> ChiItem(ids, tiles) { viewModel.onClickOpenHand(tiles) }
                             is OpenTile.Kan -> {
-                                if(tiles.close) ClosedKanItem(ids) else OpenKanItem(ids)
+                                if(tiles.close) ClosedKanItem(ids, tiles) { viewModel.onClickOpenHand(tiles) }
+                                else OpenKanItem(ids, tiles){ viewModel.onClickOpenHand(tiles) }
                             }
                         }
                     } catch (e: OpenTileIsInvalidError) {
@@ -86,12 +85,6 @@ class WaitHandFragment : Fragment() {
                 linearLayout3.forEach { it.setOnLongClickListener(listener) }
                 linearLayout4.forEach { it.setOnLongClickListener(listener) }
             }
-
-            viewModel.openTiles.observe(viewLifecycleOwner){
-                if(it == null) return@observe
-
-                it.forEach { openTile -> Log.d(TAG, "Hand:${openTile.hand}") }
-            }
         }
 
         lifecycleScope.launchWhenStarted {
@@ -105,9 +98,9 @@ class WaitHandFragment : Fragment() {
                         val num = tile.num
 
                         val openTile = when(item.itemId){
-                            R.id.ankanItem -> OpenTile.Kan(kind, num, true)
-                            R.id.minkanItem -> OpenTile.Kan(kind, num, false)
-                            R.id.ponItem -> OpenTile.Pon(kind, num)
+                            R.id.ankanItem -> OpenTile.Kan(kind, num.repeat(4), true)
+                            R.id.minkanItem -> OpenTile.Kan(kind, num.repeat(4), false)
+                            R.id.ponItem -> OpenTile.Pon(kind, num.repeat(3))
                             R.id.leftChiItem -> OpenTile.Chi(kind, OpenTile.Chi.sequenceNumbers(num).first() ?: return@setOnMenuItemClickListener true)
                             R.id.centerChiItem -> OpenTile.Chi(kind, OpenTile.Chi.sequenceNumbers(num).getOrNull(1) ?: return@setOnMenuItemClickListener true)
                             R.id.rightChiItem -> OpenTile.Chi(kind, OpenTile.Chi.sequenceNumbers(num).last() ?: return@setOnMenuItemClickListener true)
