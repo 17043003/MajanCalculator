@@ -15,13 +15,30 @@ data class HandTiles(
     private fun handSize(): Int = closeTiles.length() + (openTiles.size.times(3))
     private fun under13Tiles() = handSize() < 13
 
+    private fun lessThan4SameTiles(tile: String): Boolean {
+        val closes = closeTiles.splitByKindWithPrefix() ?: listOf()
+        val opens = openTiles.flatMap { it.hands }
+        val tiles = closes + opens
+        return tiles.count { it == tile } < 4
+    }
+
+    private fun lessThan4SameTiles(tile: OpenTile): Boolean {
+        val closes = closeTiles.splitByKindWithPrefix() ?: listOf()
+        val opens = (openTiles + tile).flatMap { it.hands }
+        val tiles = closes + opens
+
+        return tiles.groupBy { it }.map { it.value.count() }.all { it <= 4 }
+    }
+
     fun add(closeTile: String){
-        if(under13Tiles()) {
+        if(under13Tiles() && lessThan4SameTiles(closeTile)) {
             closeTiles.add(closeTile)
         }
     }
 
     fun add(openTile: OpenTile){
+        if(!lessThan4SameTiles(openTile)) return
+
         if(openTiles.size <= 3 && handSize() + 3 <= 13 && under13Tiles()) {
             openTiles.add(openTile)
         }
