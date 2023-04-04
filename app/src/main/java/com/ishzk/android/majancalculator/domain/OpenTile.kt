@@ -14,7 +14,7 @@ sealed class OpenTile {
 
         private val num = if(isValid()) n else -1
 
-        override val hand = "$kind$num"
+        override val hand = "$kind${num}p"
         override val hands: List<String>
             get() {
                 val kind = hand.first()
@@ -38,7 +38,7 @@ sealed class OpenTile {
 
         private val num: String = if(isValid()) n else ""
 
-        override val hand: String = if(isValid()) "$kind$num" else ""
+        override val hand: String = if(isValid()) "$kind${num}c" else ""
         override val hands: List<String>
             get() {
                 if(!isValid()) throw OpenTileIsInvalidError()
@@ -70,13 +70,13 @@ sealed class OpenTile {
         private fun hasSameNumber() = n.map { it }.toSet().size == 1
 
         private val num = if(isValid()) n else -1
-        private val closed = if(close) "" else "o"
+        private val closed = if(close) "k" else "o"
 
         override val hand = "$kind$num$closed"
         override val hands: List<String>
             get() {
                 val kind = hand.first()
-                return if(closed == "") hand.filter { it.isDigit() }.map { "$kind$it" } else hand.filter { it.isDigit() }.map { "$kind$it" }
+                return if(closed == "k") hand.filter { it.isDigit() }.map { "$kind$it" } else hand.filter { it.isDigit() }.map { "$kind$it" }
             }
     }
 }
