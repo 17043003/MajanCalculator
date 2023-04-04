@@ -12,7 +12,7 @@ data class HandTiles(
     val winTile: WinTile? = null,
 ){
 
-    private fun handSize(): Int = closeTiles.length() + (openTiles.size.times(3))
+    fun handSize(): Int = closeTiles.length() + (openTiles.size.times(3))
     private fun under13Tiles() = handSize() < 13
 
     private fun lessThan4SameTiles(tile: String): Boolean {
@@ -48,6 +48,11 @@ data class HandTiles(
 class CloseTiles(
     private var tiles: String,
 ){
+    fun man(): String = splitByKind()?.find { it.first() == 'm' }?.drop(1) ?: ""
+    fun sou(): String = splitByKind()?.find { it.first() == 's' }?.drop(1) ?: ""
+    fun pin(): String = splitByKind()?.find { it.first() == 'p' }?.drop(1) ?: ""
+    fun honors(): String = splitByKind()?.find { it.first() == 'h' }?.drop(1) ?: ""
+
     private fun under13Tiles(): Boolean = length() <= 13
 
     fun add(value: String){
