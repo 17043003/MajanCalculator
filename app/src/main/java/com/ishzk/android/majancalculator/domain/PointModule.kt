@@ -3,6 +3,7 @@ package com.ishzk.android.majancalculator.domain
 import com.google.gson.GsonBuilder
 import com.ishzk.android.majancalculator.BuildConfig
 import com.ishzk.android.majancalculator.repository.RetrofitPointRepository
+import com.ishzk.android.majancalculator.repository.RetrofitWaitHandRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -47,4 +48,8 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindRetrofitRepository(impl: RetrofitPointRepository): PointRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindRetrofitWaitHandRepository(impl: RetrofitWaitHandRepository): WaitHandRepository
 }

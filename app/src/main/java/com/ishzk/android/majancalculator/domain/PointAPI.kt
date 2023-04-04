@@ -21,4 +21,18 @@ interface PointAPI {
         @Query("dora_h") dora_h: String,
         @Query("tsumo") tsumo: Boolean,
     ): Call<PointData>
+
+    @GET("/wait")
+    fun getWaitHand(
+        @Query("m") m: String,
+        @Query("s") s: String,
+        @Query("p") p: String,
+        @Query("h") h: String,
+        @Query("opens") open: String,
+    ): Call<WaitHandData>
 }
+
+data class WaitHandData(
+    val winHands: List<String>,
+    val error: String,
+)
