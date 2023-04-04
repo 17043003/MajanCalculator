@@ -27,7 +27,9 @@ import com.ishzk.android.majancalculator.ui.listitem.PonItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.viewbinding.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WaitHandFragment : Fragment() {
     private val viewModel: WaitHandViewModel by viewModels()
     private var _binding: FragmentWaitHandBinding? = null

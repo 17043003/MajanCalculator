@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ishzk.android.majancalculator.R
 import com.ishzk.android.majancalculator.domain.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 
 data class LongClickedState(
@@ -14,7 +16,8 @@ data class LongClickedState(
     var isClicked: Boolean = false,
 )
 
-class WaitHandViewModel : ViewModel() {
+@HiltViewModel
+class WaitHandViewModel @Inject constructor(private val repository: WaitHandRepository) : ViewModel() {
     val handTiles = MutableLiveData<HandTiles>()
 
     val longClicked = MutableStateFlow(LongClickedState(null, false))
