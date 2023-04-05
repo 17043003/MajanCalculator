@@ -4,10 +4,14 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ishzk.android.majancalculator.R
 import com.ishzk.android.majancalculator.domain.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -56,6 +60,14 @@ class WaitHandViewModel @Inject constructor(private val repository: WaitHandRepo
     fun onClickOpenHand(openTile: OpenTile){
         handTiles.value?.openTiles?.remove(openTile)
         handTiles.postValue(handTiles.value)
+    }
+
+    fun onClickResult() = viewModelScope.launch(Dispatchers.IO) {
+        val request = handTiles.value?.toWaitHandRequest() ?: return@launch
+        repository.fetchWaitHand(request).collect{
+            val w = it.winHands.first()
+            Log.d(TAG, w.tile)
+        }
     }
 
     fun getIDString(viewID: Int): String = when(viewID){
