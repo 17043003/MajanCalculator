@@ -26,5 +26,5 @@ data class WaitHandRequest(
 )
 
 data class WaitHandResponse(
-    val winHands: List<String>
+    val winHands: List<WinHand>
 )

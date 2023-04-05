@@ -24,7 +24,7 @@ class WaitHandService @Inject constructor(
                 return@flow
             }
 
-            val waitHandResponse = WaitHandResponse(body.winHands)
+            val waitHandResponse = WaitHandResponse(body.win)
             emit( Result.success(waitHandResponse) )
         }
     }

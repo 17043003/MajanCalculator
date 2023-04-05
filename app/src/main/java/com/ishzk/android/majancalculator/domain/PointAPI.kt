@@ -31,8 +31,3 @@ interface PointAPI {
         @Query("opens") open: String,
     ): Call<WaitHandData>
 }
-
-data class WaitHandData(
-    val winHands: List<String>,
-    val error: String,
-)
