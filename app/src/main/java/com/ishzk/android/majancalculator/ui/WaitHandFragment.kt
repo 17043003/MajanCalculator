@@ -20,10 +20,7 @@ import com.ishzk.android.majancalculator.domain.OpenTileIsInvalidError
 import com.ishzk.android.majancalculator.domain.Tile
 import com.ishzk.android.majancalculator.domain.TileKind
 import com.ishzk.android.majancalculator.ui.adapter.SelectHandAdapter
-import com.ishzk.android.majancalculator.ui.listitem.ChiItem
-import com.ishzk.android.majancalculator.ui.listitem.ClosedKanItem
-import com.ishzk.android.majancalculator.ui.listitem.OpenKanItem
-import com.ishzk.android.majancalculator.ui.listitem.PonItem
+import com.ishzk.android.majancalculator.ui.listitem.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.viewbinding.GroupieViewHolder
@@ -37,6 +34,7 @@ class WaitHandFragment : Fragment() {
 
     private val adapter by lazy { SelectHandAdapter(viewModel) }
     private val openTileAdapter by lazy { GroupieAdapter() }
+    private val waitHandAdapter by lazy { GroupieAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +49,7 @@ class WaitHandFragment : Fragment() {
         binding.selectedHandsList.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
         binding.openHandList.adapter = openTileAdapter
+        binding.waitHandList.adapter = waitHandAdapter
 
         lifecycleScope.launchWhenStarted {
             viewModel.handTiles.observe(viewLifecycleOwner){
@@ -74,6 +73,12 @@ class WaitHandFragment : Fragment() {
                     }
                 }
                 openTileAdapter.addAll(itemList)
+            }
+
+            viewModel.waitTiles.observe(viewLifecycleOwner){ waitTiles ->
+                waitHandAdapter.clear()
+                val waitItems = waitTiles.map { viewModel.getDrawableID(it) }.map { WaitHandItem(it) }
+                waitHandAdapter.addAll(waitItems)
             }
 
             val listener = { button: View ->

@@ -23,6 +23,7 @@ data class LongClickedState(
 @HiltViewModel
 class WaitHandViewModel @Inject constructor(private val repository: WaitHandRepository) : ViewModel() {
     val handTiles = MutableLiveData<HandTiles>()
+    val waitTiles = MutableLiveData<List<String>>()
 
     val longClicked = MutableStateFlow(LongClickedState(null, false))
 
@@ -62,11 +63,14 @@ class WaitHandViewModel @Inject constructor(private val repository: WaitHandRepo
         handTiles.postValue(handTiles.value)
     }
 
-    fun onClickResult() = viewModelScope.launch(Dispatchers.IO) {
-        val request = handTiles.value?.toWaitHandRequest() ?: return@launch
-        repository.fetchWaitHand(request).collect{
-            val w = it.winHands.first()
-            Log.d(TAG, w.tile)
+    fun onClickResult(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val request = handTiles.value?.toWaitHandRequest() ?: return@launch
+            repository.fetchWaitHand(request).collect { result ->
+                waitTiles.postValue(result.winHands.map {
+                    it.tile.reversed().replace('z', 'h') // return z as honors.
+                })
+            }
         }
     }
 
