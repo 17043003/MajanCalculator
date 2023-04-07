@@ -1,7 +1,10 @@
 package com.ishzk.android.majancalculator.domain
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 
 import javax.inject.Inject
 
@@ -14,18 +17,20 @@ class WaitHandService @Inject constructor(
         pin: String,
         honors: String,
         opens: String,
-    ): Flow<Result<WaitHandResponse>> {
-        val response = api.getWaitHand(man, sou, pin, honors, opens).execute()
-        val body = response.body()
+    ): Flow<Result<WaitHandResponse>> = withContext(Dispatchers.IO) {
+        flow{
+            val response = api.getWaitHand(man, sou, pin, honors, opens).execute()
+            val body = response.body()
 
-        return flow {
             if (body == null) {
-                emit(Result.failure(java.lang.RuntimeException("API call failed.")))
+                emit(Result.failure(java.lang.RuntimeException("API call failed, body is null.")))
                 return@flow
             }
 
             val waitHandResponse = WaitHandResponse(body.win)
-            emit( Result.success(waitHandResponse) )
+            emit(Result.success(waitHandResponse))
         }
+    }.catch {
+        emit(Result.failure(java.lang.RuntimeException("API call failed.")))
     }
 }

@@ -54,4 +54,5 @@
     <string name="CenterChiItem">中心でチー</string>
     <string name="RightChiItem">始点でチー</string>
     <string name="WaitHandResultButton">待ち牌</string>
+    <string name="WaitHandText">待ち牌:</string>
 </resources>
