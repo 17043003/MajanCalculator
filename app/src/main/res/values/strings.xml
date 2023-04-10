@@ -11,6 +11,7 @@
     <string name="ron_switch">ロン</string>
     <string name="menu_calculate_item">点数計算</string>
     <string name="menu_wait_hand_item">待ち牌表示</string>
+    <string name="menu_hand_point_item">和了点計算</string>
     <string name="image_m1_button">select m1 as hands</string>
     <string name="image_m2_button">select m2 as hands</string>
     <string name="image_m3_button">select m3 as hands</string>

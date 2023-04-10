@@ -32,4 +32,12 @@ class NavigationFeatureTest {
 
         assertDisplayed("fragment_calculator")
     }
+
+    @Test
+    fun to_hand_point_fragment(){
+        openDrawer()
+        clickMenu(R.id.handPointFragment)
+
+        assertDisplayed("fragment_hand_point")
+    }
 }

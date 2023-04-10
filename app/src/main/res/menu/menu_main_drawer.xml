@@ -8,4 +8,7 @@
     <item
         android:id="@+id/waitHandFragment"
         android:title="@string/menu_wait_hand_item" />
+    <item
+        android:id="@+id/handPointFragment"
+        android:title="@string/menu_hand_point_item" />
 </menu>
