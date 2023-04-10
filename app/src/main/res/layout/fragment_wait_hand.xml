@@ -385,10 +385,9 @@
             android:id="@+id/waitResultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:onClick="@{() -> view_model.onClickResult()}"
             android:text="@string/WaitHandResultButton"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -410,8 +409,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/WaitHandText"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/waitHandList"
             app:layout_constraintStart_toStartOf="@+id/waitHandList" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/OpenDescription"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
