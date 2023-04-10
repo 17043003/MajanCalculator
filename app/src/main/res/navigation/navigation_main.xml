@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_calculatorFragment_to_waitHandFragment"
             app:destination="@id/waitHandFragment" />
+        <action
+            android:id="@+id/action_calculatorFragment_to_handPointFragment"
+            app:destination="@id/handPointFragment" />
     </fragment>
     <fragment
         android:id="@+id/waitHandFragment"
         android:name="com.ishzk.android.majancalculator.ui.WaitHandFragment"
         android:label="fragment_wait_hand"
         tools:layout="@layout/fragment_wait_hand" />
+    <fragment
+        android:id="@+id/handPointFragment"
+        android:name="com.ishzk.android.majancalculator.ui.HandPointFragment"
+        android:label="fragment_hand_point" />
 </navigation>
