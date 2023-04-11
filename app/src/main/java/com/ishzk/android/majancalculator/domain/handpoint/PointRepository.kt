@@ -1,4 +1,4 @@
-package com.ishzk.android.majancalculator.domain
+package com.ishzk.android.majancalculator.domain.handpoint
 
 import kotlinx.coroutines.flow.Flow
 

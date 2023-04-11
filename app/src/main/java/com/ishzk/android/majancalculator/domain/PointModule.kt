@@ -2,6 +2,7 @@ package com.ishzk.android.majancalculator.domain
 
 import com.google.gson.GsonBuilder
 import com.ishzk.android.majancalculator.BuildConfig
+import com.ishzk.android.majancalculator.domain.handpoint.PointRepository
 import com.ishzk.android.majancalculator.repository.RetrofitPointRepository
 import com.ishzk.android.majancalculator.repository.RetrofitWaitHandRepository
 import dagger.Binds
