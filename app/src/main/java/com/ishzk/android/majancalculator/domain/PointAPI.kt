@@ -1,5 +1,6 @@
 package com.ishzk.android.majancalculator.domain
 
+import com.ishzk.android.majancalculator.domain.handpoint.PointData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

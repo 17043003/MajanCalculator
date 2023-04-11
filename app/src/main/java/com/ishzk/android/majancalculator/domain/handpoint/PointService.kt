@@ -1,5 +1,6 @@
-package com.ishzk.android.majancalculator.domain
+package com.ishzk.android.majancalculator.domain.handpoint
 
+import com.ishzk.android.majancalculator.domain.PointAPI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.ishzk.android.majancalculator.domain
+package com.ishzk.android.majancalculator.domain.handpoint
 
 data class PointData(
     val cost: CostDetail,

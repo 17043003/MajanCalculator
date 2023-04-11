@@ -1,5 +1,8 @@
 package com.ishzk.android.majancalculator.domain
 
+
+
+import com.ishzk.android.majancalculator.domain.handpoint.TileKinds
 import kotlinx.coroutines.flow.Flow
 
 interface WaitHandRepository {
