@@ -36,6 +36,11 @@
         <item name="android:scaleType">fitXY</item>
     </style>
 
+    <style name="ImageButton.LinedButton">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
     <style name="SelectedImage">
         <item name="android:layout_width">27dp</item>
         <item name="android:layout_height">48dp</item>

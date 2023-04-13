@@ -21,10 +21,11 @@ data class Tile(
     val number: Int,
 ){
     init {
-        require(kind.length == 1) { "Tile kind length is too long." }
         require(kind in "msph") { "Tile kind string is not tile kind." }
         require(number in 1..9) { "Tile number is not in one to nine." }
     }
+
+    override fun toString(): String = "$kind$number"
 }
 
 // 面前の牌(和了牌は含まない)
@@ -46,11 +47,19 @@ data class CloseTiles(
 
     fun size() = tiles.size
 
-    fun add(tile: Tile){
-        if(isValid()){
-            tiles += tile
+    fun add(tile: Tile): CloseTiles{
+        return if(isValid()){
+            try{
+                CloseTiles(tiles + tile)
+            }catch (e: IllegalArgumentException){
+                this
+            }
+        }else{
+            this
         }
     }
+
+    override fun toString(): String = tiles.joinToString { it.toString() }
 }
 
 // 鳴いた牌の組をまとめたクラス
