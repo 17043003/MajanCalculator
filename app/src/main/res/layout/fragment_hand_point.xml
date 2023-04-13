@@ -15,5 +15,290 @@
         android:background="#DCF3CD"
         tools:context=".ui.HandPointFragment">
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:minHeight="96dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/selectManzuButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/man1"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m1" />
+
+                    <ImageButton
+                        android:id="@+id/man2"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m2" />
+
+                    <ImageButton
+                        android:id="@+id/man3"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m3" />
+
+                    <ImageButton
+                        android:id="@+id/man4"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m4" />
+
+                    <ImageButton
+                        android:id="@+id/man5"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m5" />
+
+                    <ImageButton
+                        android:id="@+id/man6"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/m6" />
+
+                    <ImageButton
+                        android:id="@+id/man7"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        app:srcCompat="@drawable/m7" />
+
+                    <ImageButton
+                        android:id="@+id/man8"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        app:srcCompat="@drawable/m8" />
+
+                    <ImageButton
+                        android:id="@+id/man9"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        app:srcCompat="@drawable/m9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/selectSouzuButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/sou1"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s1" />
+
+                    <ImageButton
+                        android:id="@+id/sou2"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s2" />
+
+                    <ImageButton
+                        android:id="@+id/sou3"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s3" />
+
+                    <ImageButton
+                        android:id="@+id/sou4"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s4" />
+
+                    <ImageButton
+                        android:id="@+id/sou5"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s5" />
+
+                    <ImageButton
+                        android:id="@+id/sou6"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s6" />
+
+                    <ImageButton
+                        android:id="@+id/sou7"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s7" />
+
+                    <ImageButton
+                        android:id="@+id/sou8"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s8" />
+
+                    <ImageButton
+                        android:id="@+id/sou9"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/s9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/selectPinzuButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/pin1"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p1" />
+
+                    <ImageButton
+                        android:id="@+id/pin2"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p2" />
+
+                    <ImageButton
+                        android:id="@+id/pin3"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p3" />
+
+                    <ImageButton
+                        android:id="@+id/pin4"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p4" />
+
+                    <ImageButton
+                        android:id="@+id/pin5"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p5" />
+
+                    <ImageButton
+                        android:id="@+id/pin6"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p6" />
+
+                    <ImageButton
+                        android:id="@+id/pin7"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p7" />
+
+                    <ImageButton
+                        android:id="@+id/pin8"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p8" />
+
+                    <ImageButton
+                        android:id="@+id/pin9"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/p9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/selectHonorsButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/honors1"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h1" />
+
+                    <ImageButton
+                        android:id="@+id/honors2"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h2" />
+
+                    <ImageButton
+                        android:id="@+id/honors3"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h3" />
+
+                    <ImageButton
+                        android:id="@+id/honors4"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h4" />
+
+                    <ImageButton
+                        android:id="@+id/honors5"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h5" />
+
+                    <ImageButton
+                        android:id="@+id/honors6"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h6" />
+
+                    <ImageButton
+                        android:id="@+id/honors7"
+                        style="@style/ImageButton.LinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/h7" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
