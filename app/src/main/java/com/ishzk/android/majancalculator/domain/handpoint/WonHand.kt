@@ -50,12 +50,27 @@ data class CloseTiles(
     fun add(tile: Tile): CloseTiles{
         return if(isValid()){
             try{
-                CloseTiles(tiles + tile)
+                val groupTiles = (tiles + tile).sortedBy { it.toString() }.groupBy { it.kind }
+                val newTiles = listOf("m", "s", "p", "h").mapNotNull { groupTiles[it] }.flatten()
+                CloseTiles(newTiles)
             }catch (e: IllegalArgumentException){
                 this
             }
         }else{
             this
+        }
+    }
+
+    fun remove(tile: Tile): CloseTiles{
+        return if(tiles.isEmpty()){
+            CloseTiles()
+        }else{
+            val list = tiles.toMutableList()
+            if(list.remove(tile)) {
+                CloseTiles(list)
+            }else{
+                this
+            }
         }
     }
 

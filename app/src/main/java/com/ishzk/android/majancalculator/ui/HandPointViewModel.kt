@@ -29,6 +29,10 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
         }
     }
 
+    fun onClickSelectedCloseTile(tile: Tile){
+        _closeTiles.value = closeTiles.value.remove(tile)
+    }
+
     fun getIDString(viewID: Int): String = when(viewID){
         R.id.man1 -> "m1"
         R.id.man2 -> "m2"
