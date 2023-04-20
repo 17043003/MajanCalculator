@@ -1,18 +1,27 @@
 package com.ishzk.android.majancalculator.domain.handpoint
 
+import com.ishzk.android.majancalculator.domain.OpenTile
+
 // 和了の形になっている手牌
 class WonHand(
     val closeTiles: CloseTiles,
-    val openTiles: OpenTiles,
-    val wonTile: Tile,
+    val openTiles: List<OpenTile>,
+    val wonTile: Tile?,
 ) {
     init {
         require(closeTiles.tiles.size in 0..13)
-        require(openTiles.tiles.size in 0..12)
-        require(size() == 14)
+        require(openTiles.size.times(3) in 0..12)
+
+        val list = closeTiles.tiles + openTiles.flatMap {
+            val kind = it.hand.first().toString()
+            it.hand.mapNotNull { it.digitToIntOrNull() }.map { Tile(kind, it) }
+        } + wonTile
+        val counts = list.groupBy { it }.map { it.key to it.value.count() }
+        require(counts.all { it.second in 0..4 })
+        require(size() in 0..14)
     }
 
-    fun size() = closeTiles.size() + openTiles.size() + 1
+    fun size() = closeTiles.size() + openTiles.size * 3 + 1
 }
 
 // 牌1枚
@@ -75,45 +84,4 @@ data class CloseTiles(
     }
 
     override fun toString(): String = tiles.joinToString { it.toString() }
-}
-
-// 鳴いた牌の組をまとめたクラス
-data class OpenTiles(
-    var tiles: List<OpenTile> = listOf()
-){
-    init {
-        require(tiles.size in 0..4) { "OpenTiles has open tile pairs more four." }
-        require(size() in listOf(0, 3, 6, 9, 12)) { "OpenTiles size is not zero to thirteen." }
-        require(eachTileSize().all { it.value in 0..4 }) { "OpenTiles has same tiles over four." }
-    }
-    private fun eachTileSize(): Map<Tile, Int>{
-        return tiles.flatMap { it.tiles.groupBy { it }.map { it.key to it.value.count() } }.toMap()
-    }
-
-    private fun sizeIsUnder4() = tiles.size in 0..4
-    private fun sizeIsInFourEachKind() = eachTileSize().all { it.value in 0..4 }
-    private fun isValid() = sizeIsUnder4() && sizeIsInFourEachKind()
-
-    fun size() = tiles.fold(0) { sum, openTile -> sum + openTile.size() }
-
-    fun add(openTile: OpenTile){
-        if(isValid()){
-            tiles += openTile
-        }
-    }
-}
-
-// 鳴いた牌の一組
-data class OpenTile(
-    val kind: String,
-    private val numbers: List<Int>,
-){
-    val tiles: List<Tile> = numbers.map { Tile(kind, it) }
-
-    init {
-        require(numbers.all { it in 1..9 }) { "OpenTile number is not one to nine." }
-        require(tiles.size in 3..4) { "OpenTile tiles size is not 3 or 4." }
-        require(tiles.all { it.kind == tiles.first().kind }) { "OpenTile has not same kind tiles." }
-    }
-    fun size() = 3
 }

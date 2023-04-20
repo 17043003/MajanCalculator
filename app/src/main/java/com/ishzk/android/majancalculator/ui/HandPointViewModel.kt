@@ -2,35 +2,97 @@ package com.ishzk.android.majancalculator.ui
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ishzk.android.majancalculator.R
+import com.ishzk.android.majancalculator.domain.OpenTile
+import com.ishzk.android.majancalculator.domain.TileKind
 import com.ishzk.android.majancalculator.domain.handpoint.CloseTiles
 import com.ishzk.android.majancalculator.domain.handpoint.PointRepository
 import com.ishzk.android.majancalculator.domain.handpoint.Tile
+import com.ishzk.android.majancalculator.domain.handpoint.WonHand
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.IllegalArgumentException
 
 @HiltViewModel
 class HandPointViewModel @Inject constructor(private val repository: PointRepository): ViewModel() {
 
+    private val _wonHand = MutableStateFlow<WonHand?>(null)
+
     private val _closeTiles = MutableStateFlow(CloseTiles())
     val closeTiles = _closeTiles.asStateFlow()
+
+    private val _openTiles = MutableStateFlow(listOf<OpenTile>())
+    val openTiles = _openTiles.asStateFlow()
+
+    private val _selectedOpen = MutableStateFlow<Opens?>(null)
+
+    private val _wonTile = MutableStateFlow<Tile?>(null)
+    val wonTile = _wonTile.asStateFlow()
+    enum class Opens{
+        CHI,
+        PON,
+        ANKAN,
+        MINKAN,
+    }
+
+
     fun onClickImageButton(view: View){
         viewModelScope.launch {
             val tileString = getIDString(view.id)
             Log.d("HandPointViewModel", "Clicked $tileString")
             val tile = Tile(tileString.first().toString(), tileString.last().digitToInt())
-            _closeTiles.value = closeTiles.value.add(tile)
+            if(_selectedOpen.value == null) {
+                try {
+                    _wonHand.value = WonHand(
+                        closeTiles.value.add(tile),
+                        openTiles.value,
+                        wonTile.value)
+
+                }catch (e: IllegalArgumentException){
+                    return@launch
+                }
+
+                _closeTiles.value = closeTiles.value.add(tile)
+            }else{
+                val tileKind = TileKind.getKind(tile.toString()) ?: return@launch
+                val openTile = when(_selectedOpen.value){
+                    Opens.CHI -> try{ OpenTile.Chi(tileKind, listOf(tile.number, tile.number + 1, tile.number + 2).joinToString("")) }catch (e: IllegalArgumentException){ return@launch }
+                    Opens.PON -> OpenTile.Pon(tileKind, listOf(tile.number, tile.number, tile.number).joinToString(""))
+                    Opens.ANKAN -> OpenTile.Kan(tileKind, listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""), true)
+                    Opens.MINKAN -> OpenTile.Kan(tileKind, listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""), false)
+                    else -> return@launch
+                }
+
+                try {
+                    _wonHand.value = WonHand(
+                        closeTiles.value,
+                        openTiles.value + openTile,
+                        wonTile.value)
+
+                }catch (e: IllegalArgumentException){
+                    return@launch
+                }
+
+                _openTiles.value = openTiles.value + openTile
+            }
         }
     }
 
     fun onClickSelectedCloseTile(tile: Tile){
         _closeTiles.value = closeTiles.value.remove(tile)
+    }
+
+    fun onClickSelectedOpenTile(openTile: OpenTile){
+        _openTiles.value = _openTiles.value.filterNot { it == openTile }
+    }
+
+    fun onSelectedOpenToggle(kind: Opens?){
+        _selectedOpen.value = kind
     }
 
     fun getIDString(viewID: Int): String = when(viewID){

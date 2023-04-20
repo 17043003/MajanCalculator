@@ -304,26 +304,76 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectedTilesList"
             android:layout_width="0dp"
-            android:layout_height="158dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="wrap"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectedOpenTilesList"
             android:layout_width="0dp"
-            android:layout_height="295dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
             app:layout_constraintEnd_toEndOf="@+id/selectedTilesList"
             app:layout_constraintStart_toStartOf="@+id/selectedTilesList"
-            app:layout_constraintTop_toBottomOf="@+id/selectedTilesList" />
+            app:layout_constraintTop_toBottomOf="@+id/selectedTilesList"
+            tools:itemCount="3" />
+
+        <ToggleButton
+            android:id="@+id/ChiToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton"
+            android:textOff="@string/ChiToggleText"
+            android:textOn="@string/ChiToggleText"
+            app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+            app:layout_constraintEnd_toStartOf="@+id/PonToggle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/PonToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton"
+            android:textOff="@string/PonToggleText"
+            android:textOn="@string/PonToggleText"
+            app:layout_constraintEnd_toStartOf="@+id/AnkanToggle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ChiToggle"
+            app:layout_constraintTop_toTopOf="@+id/ChiToggle" />
+
+        <ToggleButton
+            android:id="@+id/AnkanToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton"
+            android:textOff="@string/AnkanToggleText"
+            android:textOn="@string/AnkanToggleText"
+            app:layout_constraintEnd_toStartOf="@+id/MinkanToggle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/PonToggle"
+            app:layout_constraintTop_toTopOf="@+id/PonToggle" />
+
+        <ToggleButton
+            android:id="@+id/MinkanToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton"
+            android:textOff="@string/MinkanToggleText"
+            android:textOn="@string/MinkanToggleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/AnkanToggle"
+            app:layout_constraintTop_toTopOf="@+id/AnkanToggle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
