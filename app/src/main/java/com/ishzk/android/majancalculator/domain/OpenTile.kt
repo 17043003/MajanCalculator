@@ -26,6 +26,11 @@ sealed class OpenTile {
         private val kind: TileKind,
         private val n: String,
     ): OpenTile() {
+
+        init {
+            require(kind.kind != TileKind.Honor().kind)
+        }
+
         private fun isValid() = hasThree() && isSequential() && isNumbers()
         private fun hasThree() = n.length == 3
         private fun isSequential(): Boolean {

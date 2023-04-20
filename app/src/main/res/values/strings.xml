@@ -57,4 +57,8 @@
     <string name="WaitHandResultButton">待ち牌</string>
     <string name="WaitHandText">待ち牌:</string>
     <string name="OpenDescription">※鳴きは長押し</string>
+    <string name="ChiToggleText">チー</string>
+    <string name="PonToggleText">ポン</string>
+    <string name="AnkanToggleText">暗カン</string>
+    <string name="MinkanToggleText">明カン</string>
 </resources>
