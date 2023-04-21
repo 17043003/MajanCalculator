@@ -31,6 +31,9 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
 
     private val _selectedOpen = MutableStateFlow<Opens?>(null)
 
+    private val _isSelectingWon = MutableStateFlow(false)
+    val isSelectingWon = _isSelectingWon.asStateFlow()
+
     private val _wonTile = MutableStateFlow<Tile?>(null)
     val wonTile = _wonTile.asStateFlow()
     enum class Opens{
@@ -46,39 +49,15 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
             val tileString = getIDString(view.id)
             Log.d("HandPointViewModel", "Clicked $tileString")
             val tile = Tile(tileString.first().toString(), tileString.last().digitToInt())
+            if(_isSelectingWon.value){
+                setWonTile(tile)
+                return@launch
+            }
+
             if(_selectedOpen.value == null) {
-                try {
-                    _wonHand.value = WonHand(
-                        closeTiles.value.add(tile),
-                        openTiles.value,
-                        wonTile.value)
-
-                }catch (e: IllegalArgumentException){
-                    return@launch
-                }
-
-                _closeTiles.value = closeTiles.value.add(tile)
+                setCloseTile(tile)
             }else{
-                val tileKind = TileKind.getKind(tile.toString()) ?: return@launch
-                val openTile = when(_selectedOpen.value){
-                    Opens.CHI -> try{ OpenTile.Chi(tileKind, listOf(tile.number, tile.number + 1, tile.number + 2).joinToString("")) }catch (e: IllegalArgumentException){ return@launch }
-                    Opens.PON -> OpenTile.Pon(tileKind, listOf(tile.number, tile.number, tile.number).joinToString(""))
-                    Opens.ANKAN -> OpenTile.Kan(tileKind, listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""), true)
-                    Opens.MINKAN -> OpenTile.Kan(tileKind, listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""), false)
-                    else -> return@launch
-                }
-
-                try {
-                    _wonHand.value = WonHand(
-                        closeTiles.value,
-                        openTiles.value + openTile,
-                        wonTile.value)
-
-                }catch (e: IllegalArgumentException){
-                    return@launch
-                }
-
-                _openTiles.value = openTiles.value + openTile
+                setOpenTile(tile)
             }
         }
     }
@@ -93,6 +72,85 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
 
     fun onSelectedOpenToggle(kind: Opens?){
         _selectedOpen.value = kind
+    }
+
+    fun onClickWonRect(){
+        _isSelectingWon.value = !_isSelectingWon.value
+    }
+
+    private fun setCloseTile(tile: Tile) {
+        try {
+            _wonHand.value = WonHand(
+                closeTiles.value.add(tile),
+                openTiles.value,
+                wonTile.value
+            )
+        } catch (e: IllegalArgumentException) {
+            return
+        }
+
+        _closeTiles.value = closeTiles.value.add(tile)
+    }
+
+    private fun setWonTile(tile: Tile) {
+        try {
+            _wonHand.value = WonHand(
+                closeTiles.value,
+                openTiles.value,
+                tile
+            )
+        } catch (e: IllegalArgumentException) {
+            return
+        }
+
+        _wonTile.value = tile
+        _isSelectingWon.value = false
+    }
+
+    private fun setOpenTile(tile: Tile) {
+        val tileKind = TileKind.getKind(tile.toString()) ?: return
+        val openTile = when (_selectedOpen.value) {
+            Opens.CHI -> try {
+                OpenTile.Chi(
+                    tileKind,
+                    listOf(tile.number, tile.number + 1, tile.number + 2).joinToString("")
+                )
+            } catch (e: IllegalArgumentException) {
+                return
+            }
+
+            Opens.PON -> OpenTile.Pon(
+                tileKind,
+                listOf(tile.number, tile.number, tile.number).joinToString("")
+            )
+
+            Opens.ANKAN -> OpenTile.Kan(
+                tileKind,
+                listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""),
+                true
+            )
+
+            Opens.MINKAN -> OpenTile.Kan(
+                tileKind,
+                listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""),
+                false
+            )
+
+            else -> return
+        }
+
+        try {
+            _wonHand.value = WonHand(
+                closeTiles.value,
+                openTiles.value + openTile,
+                wonTile.value
+            )
+
+        } catch (e: IllegalArgumentException) {
+            return
+        }
+
+        _openTiles.value = openTiles.value + openTile
     }
 
     fun getIDString(viewID: Int): String = when(viewID){
