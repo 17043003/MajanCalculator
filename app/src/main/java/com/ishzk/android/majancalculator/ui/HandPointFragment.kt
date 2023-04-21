@@ -68,7 +68,21 @@ class HandPointFragment: Fragment() {
         // Show selected open tiles on RecyclerView.
         setOpenTiles()
 
+        // Show selected won tile.
+        showSelectedWonTile()
+
         return binding.root
+    }
+
+    private fun showSelectedWonTile() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.wonTile.collect {
+                    if (it == null) return@collect
+                    binding.wonTileImage.setImageResource(viewModel.getDrawableID(it.toString()))
+                }
+            }
+        }
     }
 
     private fun setOpenTiles() {
