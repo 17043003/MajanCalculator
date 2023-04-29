@@ -53,6 +53,8 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
     val rinshanCheck = MutableStateFlow(false)
     val chankanCheck = MutableStateFlow(false)
 
+    val isMenzen = MutableStateFlow(true)
+
     enum class Opens{
         CHI,
         PON,

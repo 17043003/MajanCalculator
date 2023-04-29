@@ -504,6 +504,7 @@
             android:layout_marginStart="24dp"
             android:text="@string/reachCheck"
             android:checked="@={view_model.reachCheck}"
+            android:enabled="@{view_model.isMenzen}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -513,6 +514,7 @@
             android:layout_height="wrap_content"
             android:text="@string/doubleReachCheck"
             android:checked="@={view_model.doubleReachCheck}"
+            android:enabled="@{view_model.isMenzen}"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -522,6 +524,7 @@
             android:layout_height="wrap_content"
             android:text="@string/oneShotCheck"
             android:checked="@={view_model.oneShotCheck}"
+            android:enabled="@{view_model.isMenzen}"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
