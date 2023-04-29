@@ -45,6 +45,14 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
     val ownWind = MutableStateFlow(0)
     val winds = listOf("東", "南", "西", "北")
 
+    val reachCheck = MutableStateFlow(false)
+    val doubleReachCheck = MutableStateFlow(false)
+    val oneShotCheck = MutableStateFlow(false)
+
+    val haiteiCheck = MutableStateFlow(false)
+    val rinshanCheck = MutableStateFlow(false)
+    val chankanCheck = MutableStateFlow(false)
+
     enum class Opens{
         CHI,
         PON,

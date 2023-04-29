@@ -65,4 +65,10 @@
     <string name="doraDescription">ドラ：</string>
     <string name="fieldWindDescription">場風</string>
     <string name="ownWindDescription">自風</string>
+    <string name="reachCheck">リーチ</string>
+    <string name="doubleReachCheck">ダブルリーチ</string>
+    <string name="oneShotCheck">一発</string>
+    <string name="haiteiCheck">海底・河底</string>
+    <string name="rinshanCheck">嶺上開花</string>
+    <string name="chankanCheck">槍槓</string>
 </resources>
