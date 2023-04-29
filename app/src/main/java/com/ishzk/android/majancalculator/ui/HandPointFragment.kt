@@ -24,6 +24,7 @@ import com.ishzk.android.majancalculator.ui.listitem.OpenKanItem
 import com.ishzk.android.majancalculator.ui.listitem.PonItem
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -70,6 +71,27 @@ class HandPointFragment: Fragment() {
 
         // Show selected won tile.
         showSelectedWonTile()
+
+        // reach or double reach can be checked.
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.reachCheck.collect{
+                    if(it) viewModel.doubleReachCheck.value = false
+                    else viewModel.oneShotCheck.value = viewModel.reachCheck.value || viewModel.doubleReachCheck.value
+                }
+            }
+        }
+
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.doubleReachCheck.collect{
+                    if(it) viewModel.reachCheck.value = false
+                    else viewModel.oneShotCheck.value = viewModel.reachCheck.value || viewModel.doubleReachCheck.value
+                }
+            }
+        }
+
+
 
         return binding.root
     }
