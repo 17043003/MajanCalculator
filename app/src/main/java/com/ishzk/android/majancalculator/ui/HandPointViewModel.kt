@@ -36,6 +36,11 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
 
     private val _wonTile = MutableStateFlow<Tile?>(null)
     val wonTile = _wonTile.asStateFlow()
+
+    val ron = MutableStateFlow(false)
+    val dora = MutableStateFlow(0)
+    val doraEntries = (0..12).map { "    $it    " }
+
     enum class Opens{
         CHI,
         PON,
