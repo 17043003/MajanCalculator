@@ -63,4 +63,6 @@
     <string name="MinkanToggleText">明カン</string>
     <string name="won_tile_description">和了牌</string>
     <string name="doraDescription">ドラ：</string>
+    <string name="fieldWindDescription">場風</string>
+    <string name="ownWindDescription">自風</string>
 </resources>
