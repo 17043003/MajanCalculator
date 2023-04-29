@@ -41,6 +41,10 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
     val dora = MutableStateFlow(0)
     val doraEntries = (0..12).map { "    $it    " }
 
+    val fieldWind = MutableStateFlow(0)
+    val ownWind = MutableStateFlow(0)
+    val winds = listOf("東", "南", "西", "北")
+
     enum class Opens{
         CHI,
         PON,
