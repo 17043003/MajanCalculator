@@ -91,7 +91,18 @@ class HandPointFragment: Fragment() {
             }
         }
 
-
+        // disabled checkbox by selected tiles.
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isMenzen.collect {
+                    if(!it) {
+                        viewModel.reachCheck.value = false
+                        viewModel.doubleReachCheck.value = false
+                        viewModel.oneShotCheck.value = false
+                    }
+                }
+            }
+        }
 
         return binding.root
     }
@@ -140,6 +151,8 @@ class HandPointFragment: Fragment() {
                         }
                         openTileAdapter.addAll(itemList)
                     }
+
+                    viewModel.isMenzen.value = it.isEmpty()
                 }
             }
         }
