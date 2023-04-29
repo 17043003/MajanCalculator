@@ -416,5 +416,47 @@
             app:layout_constraintStart_toStartOf="@+id/wonTileImage"
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
+        <Switch
+            android:id="@+id/howWonSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:checked="@={view_model.ron}"
+            android:text="@string/tsumo_switch"
+            android:textColor="@android:color/secondary_text_light"
+            app:layout_constraintStart_toEndOf="@+id/wonTileGroup"
+            app:layout_constraintTop_toBottomOf="@+id/selectedOpenTilesList" />
+
+        <TextView
+            android:id="@+id/ronText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ron_switch"
+            android:textColor="@android:color/secondary_text_light"
+            app:layout_constraintBottom_toBottomOf="@+id/howWonSwitch"
+            app:layout_constraintStart_toEndOf="@+id/howWonSwitch"
+            app:layout_constraintTop_toTopOf="@+id/howWonSwitch" />
+
+        <TextView
+            android:id="@+id/doraText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/doraDescription"
+            android:textColor="@android:color/secondary_text_light"
+            app:layout_constraintStart_toStartOf="@+id/howWonSwitch"
+            app:layout_constraintTop_toBottomOf="@+id/howWonSwitch" />
+
+        <Spinner
+            android:id="@+id/doraSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@{view_model.doraEntries}"
+            android:selectedItemPosition="@={view_model.dora}"
+            app:layout_constraintBottom_toBottomOf="@+id/doraText"
+            app:layout_constraintStart_toEndOf="@+id/doraText"
+            app:layout_constraintTop_toTopOf="@+id/doraText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
