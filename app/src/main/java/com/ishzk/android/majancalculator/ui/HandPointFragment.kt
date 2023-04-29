@@ -77,7 +77,7 @@ class HandPointFragment: Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.reachCheck.collect{
                     if(it) viewModel.doubleReachCheck.value = false
-                    else viewModel.oneShotCheck.value = viewModel.reachCheck.value || viewModel.doubleReachCheck.value
+                    else viewModel.oneShotCheck.value = (viewModel.reachCheck.value || viewModel.doubleReachCheck.value) && viewModel.oneShotCheck.value
                 }
             }
         }
@@ -86,7 +86,7 @@ class HandPointFragment: Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.doubleReachCheck.collect{
                     if(it) viewModel.reachCheck.value = false
-                    else viewModel.oneShotCheck.value = viewModel.reachCheck.value || viewModel.doubleReachCheck.value
+                    else viewModel.oneShotCheck.value = (viewModel.reachCheck.value || viewModel.doubleReachCheck.value) && viewModel.oneShotCheck.value
                 }
             }
         }
