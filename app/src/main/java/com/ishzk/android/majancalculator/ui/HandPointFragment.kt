@@ -104,6 +104,22 @@ class HandPointFragment: Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.oneShotCheck.collect{
+                    if(it) viewModel.rinshanCheck.value = false
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.rinshanCheck.collect{
+                    if(it) viewModel.oneShotCheck.value = false
+                }
+            }
+        }
+
         return binding.root
     }
 
@@ -138,6 +154,8 @@ class HandPointFragment: Fragment() {
                                 ) { viewModel.onClickSelectedOpenTile(tiles) }
 
                                 is OpenTile.Kan -> {
+                                    viewModel.canRinshan.value = true
+
                                     if (tiles.close) ClosedKanItem(
                                         ids,
                                         tiles
@@ -152,7 +170,8 @@ class HandPointFragment: Fragment() {
                         openTileAdapter.addAll(itemList)
                     }
 
-                    viewModel.isMenzen.value = it.isEmpty()
+                    viewModel.isMenzen.value = it.isEmpty() || it.all { openTile -> openTile.hand.last() == 'k' }
+                    viewModel.canRinshan.value = it.any { openTile -> openTile.hand.last() == 'k' || openTile.hand.last() == 'o' }
                 }
             }
         }

@@ -524,7 +524,7 @@
             android:layout_height="wrap_content"
             android:text="@string/oneShotCheck"
             android:checked="@={view_model.oneShotCheck}"
-            android:enabled="@{view_model.isMenzen}"
+            android:enabled="@{view_model.reachCheck || view_model.doubleReachCheck}"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -551,6 +551,7 @@
             android:layout_height="wrap_content"
             android:text="@string/rinshanCheck"
             android:checked="@={view_model.rinshanCheck}"
+            android:enabled="@{view_model.canRinshan}"
             app:layout_constraintBottom_toBottomOf="@+id/haiteiCheck"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/haiteiCheck" />
