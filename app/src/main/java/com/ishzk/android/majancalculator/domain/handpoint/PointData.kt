@@ -7,6 +7,7 @@ data class PointData(
     val error: String,
     val is_open_hand: Boolean,
     val yaku: List<YakuDetail>,
+    val fu_details: List<FuDetail>,
 )
 
 data class CostDetail(
@@ -23,4 +24,17 @@ data class YakuDetail(
     val han_open: Int,
     val han_closed: Int,
     val is_yakuman: Boolean,
+)
+
+data class FuDetail(
+    val fu: Int,
+    val reason: String,
+)
+
+data class ResultHandPoint(
+    val fann: Int,
+    val fu: Int,
+    val total: String,
+    val yakuDetail: List<YakuDetail>,
+    val fuDetail: List<FuDetail>,
 )

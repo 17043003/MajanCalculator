@@ -16,11 +16,11 @@ interface PointAPI {
         @Query("w_s") w_s: String,
         @Query("w_p") w_p: String,
         @Query("w_h") w_h: String,
-        @Query("dora_m") dora_m: String,
-        @Query("dora_s") dora_s: String,
-        @Query("dora_p") dora_p: String,
-        @Query("dora_h") dora_h: String,
+        @Query("opens") opens: String,
+        @Query("own_wind") ownWind: Int,
+        @Query("field_wind") fieldWind: Int,
         @Query("tsumo") tsumo: Boolean,
+        @Query("yakus") yakus: String,
     ): Call<PointData>
 
     @GET("/wait")

@@ -9,8 +9,11 @@ interface PointRepository {
 data class PointRequestData(
     val hands: TileKinds,
     val win_tile: TileKinds,
-    val dora_indicator: TileKinds,
+    val opens: String,
+    val ownWind: Int,
+    val fieldWind: Int,
     val isTsumo: Boolean,
+    val yakus: String,
 )
 
 data class PointResponseData(
@@ -19,6 +22,7 @@ data class PointResponseData(
     val han: Int,
     val fu: Int,
     val yaku: List<YakuDetail>,
+    val fuDetail: List<FuDetail>,
 )
 
 data class TileKinds(

@@ -19,22 +19,26 @@ class RetrofitPointRepository @Inject constructor(
     override suspend fun fetchPoint(request: PointRequestData): Flow<PointResponseData> = withContext(Dispatchers.IO) {
         val h = request.hands
         val w = request.win_tile
-        val d = request.dora_indicator
+        val opens = request.opens
+        val ownWind = request.ownWind
+        val fieldWind = request.fieldWind
+        val isTsumo = request.isTsumo
+        val yakus = request.yakus
 
         service.getPoint(
             h.man,
-            h.pin,
             h.sou,
+            h.pin,
             h.honors,
             w.man,
-            w.pin,
             w.sou,
+            w.pin,
             w.honors,
-            d.man,
-            d.pin,
-            d.sou,
-            d.honors,
-            request.isTsumo
+            opens,
+            ownWind,
+            fieldWind,
+            isTsumo,
+            yakus
         ).filter { it.isSuccess }.map { it.getOrThrow() }
     }
 }
