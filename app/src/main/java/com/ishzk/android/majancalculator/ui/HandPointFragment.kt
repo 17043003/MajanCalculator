@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ishzk.android.majancalculator.databinding.FragmentHandPointBinding
@@ -125,7 +126,9 @@ class HandPointFragment: Fragment() {
                 viewModel.resultHandPoint.collect{
                     if(it == null) return@collect
 
-
+                    val action = HandPointFragmentDirections.actionHandPointFragmentToPointResultFragment()
+                    val nacController = findNavController()
+                    nacController.navigate(action)
                 }
             }
         }
