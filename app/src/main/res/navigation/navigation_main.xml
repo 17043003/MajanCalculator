@@ -25,5 +25,13 @@
     <fragment
         android:id="@+id/handPointFragment"
         android:name="com.ishzk.android.majancalculator.ui.HandPointFragment"
-        android:label="fragment_hand_point" />
+        android:label="fragment_hand_point" >
+        <action
+            android:id="@+id/action_handPointFragment_to_pointResultFragment"
+            app:destination="@id/pointResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pointResultFragment"
+        android:name="com.ishzk.android.majancalculator.ui.PointResultFragment"
+        android:label="PointResultFragment" />
 </navigation>
