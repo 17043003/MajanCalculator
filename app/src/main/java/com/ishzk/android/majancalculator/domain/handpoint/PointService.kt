@@ -17,13 +17,13 @@ class PointService @Inject constructor(
         w_s: String,
         w_p: String,
         w_h: String,
-        dora_m: String,
-        dora_s: String,
-        dora_p: String,
-        dora_h: String,
+        opens: String,
+        ownWind: Int,
+        fieldWind: Int,
         tsumo: Boolean,
+        yakus: String,
     ): Flow<Result<PointResponseData>> {
-        val response = api.getPoint(m, s, p, h, w_m, w_s, w_p, w_h, dora_m, dora_s, dora_p, dora_h, tsumo).execute()
+        val response = api.getPoint(m, s, p, h, w_m, w_s, w_p, w_h, opens, ownWind, fieldWind, tsumo, yakus).execute()
 
         return flow {
             val body = response.body()
@@ -39,6 +39,7 @@ class PointService @Inject constructor(
                 body.han,
                 body.fu,
                 body.yaku,
+                body.fu_details,
             )
             emit(Result.success(pointResponse))
         }

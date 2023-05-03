@@ -120,6 +120,22 @@ class HandPointFragment: Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.resultHandPoint.collect{
+                    if(it == null) return@collect
+
+
+                }
+            }
+        }
+
+        binding.pointResultButton.setOnClickListener {
+            lifecycleScope.launchWhenStarted {
+                viewModel.onClickResult()
+            }
+        }
+
         return binding.root
     }
 
@@ -225,6 +241,10 @@ class HandPointFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        const val TAG = "HandPointFragment"
     }
 }
 

@@ -22,6 +22,28 @@ class WonHand(
     }
 
     fun size() = closeTiles.size() + openTiles.size * 3 + 1
+
+    fun toRequest(ownWind: Int, fieldWind: Int, isTsumo: Boolean, yakus: String): PointRequestData? {
+        val tiles = closeTiles.tiles.map { it.kind to it.number }
+        val m = tiles.filter { it.first == "m" }.joinToString("") { it.second.toString() }
+        val s = tiles.filter { it.first == "s" }.joinToString("") { it.second.toString() }
+        val p = tiles.filter { it.first == "p" }.joinToString("") { it.second.toString() }
+        val h = tiles.filter { it.first == "h" }.joinToString("") { it.second.toString() }
+
+        val hands = TileKinds(
+            man = m,
+            sou = s,
+            pin = p,
+            honors = h,
+        )
+
+        if(wonTile == null) return null
+        val w = wonTile.toTileKinds()
+
+        val opens = openTiles.map { it.hand }.joinToString("_")
+
+        return PointRequestData(hands, w, opens, ownWind, fieldWind, isTsumo, yakus)
+    }
 }
 
 // 牌1枚
@@ -35,6 +57,17 @@ data class Tile(
     }
 
     override fun toString(): String = "$kind$number"
+
+    fun toTileKinds(): TileKinds {
+        val num = number.toString()
+        return when(kind){
+            "m" -> TileKinds(man = num)
+            "s" -> TileKinds(sou = num)
+            "p" -> TileKinds(pin = num)
+            "h" -> TileKinds(honors = num)
+            else -> TileKinds()
+        }
+    }
 }
 
 // 面前の牌(和了牌は含まない)

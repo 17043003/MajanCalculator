@@ -5,16 +5,25 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ishzk.android.majancalculator.R
+import com.ishzk.android.majancalculator.domain.FannFu
 import com.ishzk.android.majancalculator.domain.OpenTile
 import com.ishzk.android.majancalculator.domain.TileKind
+import com.ishzk.android.majancalculator.domain.WinnerChild
+import com.ishzk.android.majancalculator.domain.WinnerParent
 import com.ishzk.android.majancalculator.domain.handpoint.CloseTiles
 import com.ishzk.android.majancalculator.domain.handpoint.PointRepository
+import com.ishzk.android.majancalculator.domain.handpoint.PointRequestData
+import com.ishzk.android.majancalculator.domain.handpoint.ResultHandPoint
 import com.ishzk.android.majancalculator.domain.handpoint.Tile
 import com.ishzk.android.majancalculator.domain.handpoint.WonHand
+import com.ishzk.android.majancalculator.domain.handpoint.YakuDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.IllegalArgumentException
 
@@ -55,6 +64,9 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
 
     val isMenzen = MutableStateFlow(true)
     val canRinshan = MutableStateFlow(false)
+
+    private val _resultHandPoint: MutableStateFlow<ResultHandPoint?> = MutableStateFlow(null)
+    val resultHandPoint = _resultHandPoint.asStateFlow()
 
     enum class Opens{
         CHI,
@@ -98,6 +110,36 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
         _isSelectingWon.value = !_isSelectingWon.value
     }
 
+    suspend fun onClickResult() = withContext(Dispatchers.Default){
+        val wonHand = _wonHand.value
+        wonHand ?: return@withContext
+
+        fun Boolean.toInt(): Int = if(this) 1 else 0
+        val yakus = listOf(reachCheck.value, doubleReachCheck.value, oneShotCheck.value, rinshanCheck.value, haiteiCheck.value, chankanCheck.value)
+            .map { it.toInt() }.joinToString("")
+
+        val request = wonHand.toRequest(ownWind.value, fieldWind.value, !ron.value, yakus) ?: return@withContext
+        repository.fetchPoint(request).collect{
+            val fannFu = FannFu(it.han + dora.value, it.fu)
+
+            val result = (if (ownWind.value == 0) WinnerParent() else WinnerChild())
+                .let { winner ->
+                    if (ron.value) winner.receiveRonPoint(fannFu)
+                    else winner.receiveTsumoPoints(fannFu)
+                }.toString()
+
+            val yakuWithDora =  if(dora.value > 0) it.yaku + YakuDetail("dora", dora.value, dora.value, false) else it.yaku
+            Log.d(TAG, "fan:${fannFu.fann}, fu:${fannFu.fu}")
+            Log.d(TAG, "r:${result}, fu:${it.fuDetail}")
+
+            yakuWithDora.forEach {
+                Log.d(TAG, "name:${it.name}, han:${if(isMenzen.value) it.han_closed else it.han_open}")
+            }
+
+            _resultHandPoint.value = ResultHandPoint(fannFu.fann, fannFu.fu, result, yakuWithDora, it.fuDetail)
+        }
+    }
+
     private fun setCloseTile(tile: Tile) {
         try {
             _wonHand.value = WonHand(
@@ -130,7 +172,7 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
     private fun setOpenTile(tile: Tile) {
         val tileKind = TileKind.getKind(tile.toString()) ?: return
         val openTile = when (_selectedOpen.value) {
-            Opens.CHI -> try {
+            HandPointViewModel.Opens.CHI -> try {
                 OpenTile.Chi(
                     tileKind,
                     listOf(tile.number, tile.number + 1, tile.number + 2).joinToString("")
@@ -139,18 +181,18 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
                 return
             }
 
-            Opens.PON -> OpenTile.Pon(
+            HandPointViewModel.Opens.PON -> OpenTile.Pon(
                 tileKind,
                 listOf(tile.number, tile.number, tile.number).joinToString("")
             )
 
-            Opens.ANKAN -> OpenTile.Kan(
+            HandPointViewModel.Opens.ANKAN -> OpenTile.Kan(
                 tileKind,
                 listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""),
                 true
             )
 
-            Opens.MINKAN -> OpenTile.Kan(
+            HandPointViewModel.Opens.MINKAN -> OpenTile.Kan(
                 tileKind,
                 listOf(tile.number, tile.number, tile.number, tile.number).joinToString(""),
                 false
@@ -253,5 +295,9 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
         "h6" -> R.drawable.h6
         "h7" -> R.drawable.h7
         else -> 0
+    }
+
+    companion object{
+        const val TAG = "HandPointViewModel"
     }
 }

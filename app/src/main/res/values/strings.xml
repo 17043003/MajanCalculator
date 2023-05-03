@@ -71,4 +71,5 @@
     <string name="haiteiCheck">海底・河底</string>
     <string name="rinshanCheck">嶺上開花</string>
     <string name="chankanCheck">槍槓</string>
+    <string name="PointResultButton">点数表示</string>
 </resources>
