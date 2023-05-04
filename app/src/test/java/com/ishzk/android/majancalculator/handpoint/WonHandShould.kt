@@ -1,7 +1,6 @@
 package com.ishzk.android.majancalculator.handpoint
 
 import com.ishzk.android.majancalculator.domain.handpoint.CloseTiles
-import com.ishzk.android.majancalculator.domain.handpoint.OpenTiles
 import com.ishzk.android.majancalculator.domain.handpoint.Tile
 import com.ishzk.android.majancalculator.domain.handpoint.WonHand
 import org.junit.Test
@@ -20,16 +19,14 @@ class WonHandShould {
     private fun validWonHand(): WonHand {
         val tiles = (1..9).map{ Tile("s", it) } + (1..4).map { Tile("m", it) }
         val closeTiles = CloseTiles(tiles)
-        val openTiles = OpenTiles()
         val winTile = Tile("m", 1)
-        return WonHand(closeTiles, openTiles, winTile)
+        return WonHand(closeTiles, listOf(), winTile)
     }
 
     private fun invalidWonHand(): WonHand {
         val tiles = (1..9).map{ Tile("s", it) } + (1..4).map { Tile("m", it) } + Tile("s", 5)
         val closeTiles = CloseTiles(tiles)
-        val openTiles = OpenTiles()
         val winTile = Tile("m", 1)
-        return WonHand(closeTiles, openTiles, winTile)
+        return WonHand(closeTiles, listOf(), winTile)
     }
 }
