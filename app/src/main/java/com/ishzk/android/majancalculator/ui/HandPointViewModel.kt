@@ -140,6 +140,10 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
         }
     }
 
+    fun consumeResultEvent(){
+        _resultHandPoint.value = null
+    }
+
     private fun setCloseTile(tile: Tile) {
         try {
             _wonHand.value = WonHand(

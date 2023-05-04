@@ -122,13 +122,16 @@ class HandPointFragment: Fragment() {
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.resultHandPoint.collect{
                     if(it == null) return@collect
 
-                    val action = HandPointFragmentDirections.actionHandPointFragmentToPointResultFragment()
+                    val action = HandPointFragmentDirections.actionHandPointFragmentToPointResultFragment(resultHandPoint = it)
+
                     val nacController = findNavController()
                     nacController.navigate(action)
+
+                    viewModel.consumeResultEvent()
                 }
             }
         }
