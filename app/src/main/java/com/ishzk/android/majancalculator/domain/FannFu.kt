@@ -8,14 +8,14 @@ class FannFu(
     fann: Int = 1,
     fu: Int = 20,
 ){
-    var fann: Int = 1
+    var fann: Int = fann
     set(value) {
         field = if(value <= 1) 1
         else if(value >= 13) 13
         else value
     }
 
-    var fu: Int = 20
+    var fu: Int = fu
     set(value) {
         field = if(value <= 20) 20
         else if(value >= 110) 110
