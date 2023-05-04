@@ -33,5 +33,9 @@
     <fragment
         android:id="@+id/pointResultFragment"
         android:name="com.ishzk.android.majancalculator.ui.PointResultFragment"
-        android:label="PointResultFragment" />
+        android:label="PointResultFragment" >
+        <argument
+            android:name="resultHandPoint"
+            app:argType="com.ishzk.android.majancalculator.domain.handpoint.ResultHandPoint" />
+    </fragment>
 </navigation>
