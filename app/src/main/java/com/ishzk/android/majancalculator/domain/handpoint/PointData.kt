@@ -43,4 +43,5 @@ data class ResultHandPoint(
     val total: String,
     val yakuDetail: List<YakuDetail>,
     val fuDetail: List<FuDetail>,
+    val isMenzen: Boolean,
 ) : Parcelable
