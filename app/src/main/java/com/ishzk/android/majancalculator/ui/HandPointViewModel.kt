@@ -136,7 +136,7 @@ class HandPointViewModel @Inject constructor(private val repository: PointReposi
                 Log.d(TAG, "name:${it.name}, han:${if(isMenzen.value) it.han_closed else it.han_open}")
             }
 
-            _resultHandPoint.value = ResultHandPoint(fannFu.fann, fannFu.fu, result, yakuWithDora, it.fuDetail)
+            _resultHandPoint.value = ResultHandPoint(fannFu.fann, fannFu.fu, result, yakuWithDora, it.fuDetail, isMenzen.value)
         }
     }
 
